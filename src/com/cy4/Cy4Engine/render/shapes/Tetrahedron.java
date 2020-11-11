@@ -34,11 +34,17 @@ public class Tetrahedron {
 		}
 	}
 	
-	public void rotate(Vector3 rot) {
+	public void rotate(Vector3 rot, Vector3 lightVector) {
 		for (Polygon3D p : polygons) {
-			p.rotate(rot);
+			p.rotate(rot, lightVector);
 		}
 		this.sortPolygons();
+	}
+	
+	public void setLighting(Vector3 lightVector) {
+		for (Polygon3D p : polygons) {
+			p.updateLightingRatio(lightVector);
+		}
 	}
 	
 	private void sortPolygons() {

@@ -8,6 +8,8 @@ public interface IEntity {
 	
 	void render(Graphics g);
 	
-	void rotate(Vector3 rot);
+	void rotate(Vector3 rot, Vector3 lightVector);
+	
+	void setLighting(Vector3 lightVector);
 	
 }

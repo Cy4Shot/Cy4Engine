@@ -35,10 +35,10 @@ public class ComplexEntityBuilder {
 					
 					Polygon3D poly1 = new Polygon3D(Color.RED, p5, p6, p8, p7);
 					Polygon3D poly2 = new Polygon3D(Color.WHITE, p2, p4, p8, p6);
-					Polygon3D poly3 = new Polygon3D(Color.BLUE, p3, p4, p8, p7);
+					Polygon3D poly3 = new Polygon3D(Color.BLUE, p3, p7, p8, p4);
 					Polygon3D poly4 = new Polygon3D(Color.GREEN, p1, p2, p6, p5);
-					Polygon3D poly5 = new Polygon3D(Color.ORANGE, p1, p2, p4, p3);
-					Polygon3D poly6 = new Polygon3D(Color.YELLOW, p1, p3, p7, p5);
+					Polygon3D poly5 = new Polygon3D(Color.ORANGE, p1, p3, p4, p2);
+					Polygon3D poly6 = new Polygon3D(Color.YELLOW, p1, p5, p7, p3);
 					
 					tetrahedrons.add(new Tetrahedron(poly1, poly2, poly3, poly4, poly5, poly6));
 				}

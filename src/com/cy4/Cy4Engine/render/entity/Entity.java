@@ -33,15 +33,22 @@ public class Entity implements IEntity {
 	}
 
 	@Override
-	public void rotate(Vector3 rot) {
+	public void rotate(Vector3 rot, Vector3 lightVector) {
 		for (Tetrahedron tetra : tetrahedrons) {
-			tetra.rotate(rot);
+			tetra.rotate(rot, lightVector);
 		}
 		this.sortPolygons();
 	}
 	
 	private void sortPolygons() {
 		Polygon3D.sortPolygons(this.polygons);
+	}
+
+	@Override
+	public void setLighting(Vector3 lightVector) {
+		for (Tetrahedron tetra : tetrahedrons) {
+			tetra.setLighting(lightVector);
+		}
 	}
 
 }

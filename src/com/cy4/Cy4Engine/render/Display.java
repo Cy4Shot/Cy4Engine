@@ -20,6 +20,7 @@ public class Display extends Canvas implements Runnable {
 	public static final int TARGET_FPS = 100;
 	public static final double DEPTH_FACTOR = 1400;
 	public static final boolean ORTHOGRAPHIC = false;
+	public static final double AMBIENT_LIGHT = 0.05;
 
 	//Window
 	private Thread thread;
