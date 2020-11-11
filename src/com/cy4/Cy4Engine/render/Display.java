@@ -23,7 +23,7 @@ public class Display extends Canvas implements Runnable {
 	// Settings
 	public static final int HEIGHT = 500;
 	public static final int WIDTH = 500;
-	public static final int TARGET_FPS = 600;
+	public static final int TARGET_FPS = 100;
 	public static final boolean ORTHOGRAPHIC = false;
 
 	private EntityManager entityManager;
