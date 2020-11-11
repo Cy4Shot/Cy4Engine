@@ -14,22 +14,26 @@ import com.cy4.Cy4Engine.render.entity.EntityManager;
 @SuppressWarnings("serial")
 public class Display extends Canvas implements Runnable {
 
-	public static final long serialVersionUUID = 1L;
-
-	private Thread thread;
-	private JFrame frame;
-	private static String title = "Cy4 Engine Test";
-
 	// Settings
 	public static final int HEIGHT = 500;
 	public static final int WIDTH = 500;
 	public static final int TARGET_FPS = 100;
+	public static final double DEPTH_FACTOR = 1400;
 	public static final boolean ORTHOGRAPHIC = false;
 
+	//Window
+	private Thread thread;
+	private JFrame frame;
+	private static String title = "Cy4 Engine Test";
+
+	//Addons
 	private EntityManager entityManager;
 	private MouseInput mouse;
 
+	//Window Data
 	private static boolean running = false;
+	private final double ns = 1000000000.0 / TARGET_FPS;
+	public static final long serialVersionUUID = 1L;
 
 	public Display() {
 		this.frame = new JFrame();
@@ -76,7 +80,6 @@ public class Display extends Canvas implements Runnable {
 	public void run() {
 		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
-		final double ns = 1000000000.0 / TARGET_FPS;
 		double delta = 0;
 		int frames = 0;
 
@@ -88,7 +91,7 @@ public class Display extends Canvas implements Runnable {
 
 		while (running) {
 			long now = System.nanoTime();
-			delta += (now - lastTime) / ns;
+			delta += (now - lastTime) / this.ns;
 			lastTime = now;
 			while (delta >= 1) {
 				update();

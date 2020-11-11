@@ -23,6 +23,10 @@ public class Tetrahedron {
 		this.sortPolygons();
 	}
 	
+	public Polygon3D[] getPolygons() {
+		return this.polygons;
+	}
+	
 	
 	public void render(Graphics g) {
 		for (Polygon3D poly : this.polygons) {
@@ -38,7 +42,7 @@ public class Tetrahedron {
 	}
 	
 	private void sortPolygons() {
-		//Polygon3D.sortPolygons(this.polygons);
+		Polygon3D.sortPolygons(this.polygons);
 	}
 	
 	private void setPolygonColor() {

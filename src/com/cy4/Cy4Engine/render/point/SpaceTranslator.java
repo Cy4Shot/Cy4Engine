@@ -25,7 +25,7 @@ public class SpaceTranslator {
 		double dist = Math.sqrt(x3d*x3d + y3d*y3d);
 		double theta = Math.atan2(y3d, x3d);
 		double depth = 15 - z3d;
-		double localScale = Math.abs(1400/(depth+1400));
+		double localScale = Math.abs(Display.DEPTH_FACTOR/(depth+Display.DEPTH_FACTOR));
 		dist *= Display.ORTHOGRAPHIC ? 1 : localScale;
 		double[] newVal = new double[2];
 		newVal[0] = dist * Math.cos(theta);

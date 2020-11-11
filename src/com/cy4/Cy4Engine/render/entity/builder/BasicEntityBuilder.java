@@ -27,4 +27,13 @@ public class BasicEntityBuilder {
 		return new Entity(Arrays.asList(tetra));
 	}
 
+	public static IEntity createPlane(double size, Vector3 centre, Color c) {
+		Vector3 p1 = new Vector3(centre.x - size / 2, centre.y - size / 2, centre.z);
+		Vector3 p2 = new Vector3(centre.x + size / 2, centre.y - size / 2, centre.z);
+		Vector3 p3 = new Vector3(centre.x - size / 2, centre.y + size / 2, centre.z);
+		Vector3 p4 = new Vector3(centre.x + size / 2, centre.y + size / 2, centre.z);
+		Tetrahedron tetra = new Tetrahedron(new Polygon3D(c, p4, p3, p1, p2));
+		return new Entity(Arrays.asList(tetra));
+	}
+
 }

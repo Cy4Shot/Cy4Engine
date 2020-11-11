@@ -69,7 +69,10 @@ public class Polygon3D {
 		Collections.sort(polyList, new Comparator<Polygon3D>() {
 			@Override
 			public int compare(Polygon3D o1, Polygon3D o2) {
-				return o2.getAverageX() - o1.getAverageX() < 0 ? 1 : -1;
+				double diff = o2.getAverageX() - o1.getAverageX();
+				if (diff == 0)
+					return 0;
+				return diff < 0 ? 1 : -1;
 			}
 		});
 
