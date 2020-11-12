@@ -13,7 +13,6 @@ import com.cy4.Cy4Engine.render.poly.Polyhedron;
 
 import de.javagl.obj.Obj;
 import de.javagl.obj.ObjData;
-import de.javagl.obj.ObjGroup;
 import de.javagl.obj.ObjReader;
 import de.javagl.obj.ObjUtils;
 
@@ -24,15 +23,13 @@ public class ObjEntityBuilder {
 	}
 
 	public static IEntity readWavefront(InputStream file, double scale, Vector3 pos, Color color) throws Exception {
-		Obj obj = ObjReader.read(file);
-		obj = ObjUtils.triangulate(obj);
+		Obj obj = ObjUtils.triangulate(ObjReader.read(file));
 
 		List<Polyhedron> polyhedra = new ArrayList<Polyhedron>();
 
 		for (int g = 0; g < obj.getNumGroups(); g++) {
 
-			ObjGroup group = obj.getGroup(g);
-			Obj groupObj = ObjUtils.groupToObj(obj, group, null);
+			Obj groupObj = ObjUtils.groupToObj(obj, obj.getGroup(g), null);
 
 			float[] vertices = ObjData.getVerticesArray(groupObj);
 			int[] faces = ObjData.getFaceVertexIndicesArray(groupObj);
