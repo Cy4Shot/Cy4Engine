@@ -84,11 +84,7 @@ public class Display extends Canvas implements Runnable {
 		double delta = 0;
 		int frames = 0;
 
-		try {
-			this.entityManager.init();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		init();
 
 		while (running) {
 			long now = System.nanoTime();
@@ -109,6 +105,14 @@ public class Display extends Canvas implements Runnable {
 		}
 
 		stop();
+	}
+
+	private void init() {
+		try {
+			this.entityManager.init();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void render() {
