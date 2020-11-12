@@ -39,7 +39,7 @@ public class EntityManager {
 			int xDif = x - ix;
 			int yDif = y - iy;
 			
-			this.rotate(new Vector3(0, -yDif, -xDif));
+			this.rotate(new Vector3(0, 0, -xDif));
 		}
 		if (m.getMouseButton() == ClickType.RIGHT_CLICK) {
 			int xDif = x - ix;
