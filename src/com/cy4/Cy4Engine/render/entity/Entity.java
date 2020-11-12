@@ -7,24 +7,24 @@ import java.util.List;
 
 import com.cy4.Cy4Engine.render.point.Vector3;
 import com.cy4.Cy4Engine.render.shapes.Polygon3D;
-import com.cy4.Cy4Engine.render.shapes.Tetrahedron;
+import com.cy4.Cy4Engine.render.shapes.Polyhedron;
 
 public class Entity implements IEntity {
-	
-	private List<Tetrahedron> tetrahedrons;
+
+	private List<Polyhedron> polyhedra;
 	private Polygon3D[] polygons;
-	
-	public Entity(List<Tetrahedron> tetrahedrons) {
+
+	public Entity(List<Polyhedron> polyhedra) {
 		List<Polygon3D> temp = new ArrayList<Polygon3D>();
-		this.tetrahedrons = tetrahedrons;
-		for (Tetrahedron tetra : this.tetrahedrons) {
-			temp.addAll(Arrays.asList(tetra.getPolygons()));
+		this.polyhedra = polyhedra;
+		for (Polyhedron polyh : this.polyhedra) {
+			temp.addAll(Arrays.asList(polyh.getPolygons()));
 		}
 		this.polygons = new Polygon3D[temp.size()];
 		this.polygons = temp.toArray(this.polygons);
 		this.sortPolygons();
 	}
- 
+
 	@Override
 	public void render(Graphics g) {
 		for (Polygon3D polys : polygons) {
@@ -34,20 +34,20 @@ public class Entity implements IEntity {
 
 	@Override
 	public void rotate(Vector3 rot, Vector3 lightVector) {
-		for (Tetrahedron tetra : tetrahedrons) {
-			tetra.rotate(rot, lightVector);
+		for (Polyhedron polyh : this.polyhedra) {
+			polyh.rotate(rot, lightVector);
 		}
 		this.sortPolygons();
 	}
-	
+
 	private void sortPolygons() {
 		Polygon3D.sortPolygons(this.polygons);
 	}
 
 	@Override
 	public void setLighting(Vector3 lightVector) {
-		for (Tetrahedron tetra : tetrahedrons) {
-			tetra.setLighting(lightVector);
+		for (Polyhedron polyh : this.polyhedra) {
+			polyh.setLighting(lightVector);
 		}
 	}
 

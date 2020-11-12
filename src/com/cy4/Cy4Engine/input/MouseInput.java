@@ -7,25 +7,25 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
 public class MouseInput implements MouseListener, MouseMotionListener, MouseWheelListener {
-	
+
 	private int mouseX = -1;
 	private int mouseY = -1;
 	private int mouseB = -1;
-	
+
 	public int getMouseX() {
 		return this.mouseX;
 	}
-	
+
 	public int getMouseY() {
 		return this.mouseY;
 	}
-	
+
 	public ClickType getMouseButton() {
 		return getButtonType(this.mouseB);
 	}
-	
+
 	private ClickType getButtonType(int id) {
-		switch(id) {
+		switch (id) {
 		case 1:
 			return ClickType.LEFT_CLICK;
 		case 2:
@@ -43,7 +43,7 @@ public class MouseInput implements MouseListener, MouseMotionListener, MouseWhee
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		
+
 	}
 
 	@Override
@@ -65,12 +65,12 @@ public class MouseInput implements MouseListener, MouseMotionListener, MouseWhee
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		
+
 	}
 
 	@Override

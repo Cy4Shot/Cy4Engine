@@ -8,12 +8,12 @@ import com.cy4.Cy4Engine.render.entity.Entity;
 import com.cy4.Cy4Engine.render.entity.IEntity;
 import com.cy4.Cy4Engine.render.point.Vector3;
 import com.cy4.Cy4Engine.render.shapes.Polygon3D;
-import com.cy4.Cy4Engine.render.shapes.Tetrahedron;
+import com.cy4.Cy4Engine.render.shapes.Polyhedron;
 
 public class ComplexEntityBuilder {
 
 	public static IEntity createRubiksCube(double size, Vector3 centre, double cubeSpacing) {
-		List<Tetrahedron> tetrahedrons = new ArrayList<Tetrahedron>();
+		List<Polyhedron> polyhedra = new ArrayList<Polyhedron>();
 
 		for (int i = -1; i < 2; i++) {
 			double cubeCentreX = i * (size + cubeSpacing) + centre.x;
@@ -32,19 +32,19 @@ public class ComplexEntityBuilder {
 					Vector3 p6 = new Vector3(cubeCentreX + size / 2, cubeCentreY - size / 2, cubeCentreZ + size / 2);
 					Vector3 p7 = new Vector3(cubeCentreX + size / 2, cubeCentreY + size / 2, cubeCentreZ - size / 2);
 					Vector3 p8 = new Vector3(cubeCentreX + size / 2, cubeCentreY + size / 2, cubeCentreZ + size / 2);
-					
+
 					Polygon3D poly1 = new Polygon3D(Color.RED, p5, p6, p8, p7);
 					Polygon3D poly2 = new Polygon3D(Color.WHITE, p2, p4, p8, p6);
 					Polygon3D poly3 = new Polygon3D(Color.BLUE, p3, p7, p8, p4);
 					Polygon3D poly4 = new Polygon3D(Color.GREEN, p1, p2, p6, p5);
 					Polygon3D poly5 = new Polygon3D(Color.ORANGE, p1, p3, p4, p2);
 					Polygon3D poly6 = new Polygon3D(Color.YELLOW, p1, p5, p7, p3);
-					
-					tetrahedrons.add(new Tetrahedron(poly1, poly2, poly3, poly4, poly5, poly6));
+
+					polyhedra.add(new Polyhedron(poly1, poly2, poly3, poly4, poly5, poly6));
 				}
 			}
 		}
 
-		return new Entity(tetrahedrons);
+		return new Entity(polyhedra);
 	}
 }

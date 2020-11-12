@@ -22,16 +22,16 @@ public class Display extends Canvas implements Runnable {
 	public static final boolean ORTHOGRAPHIC = false;
 	public static final double AMBIENT_LIGHT = 0.05;
 
-	//Window
+	// Window
 	private Thread thread;
 	private JFrame frame;
 	private static String title = "Cy4 Engine Test";
 
-	//Addons
+	// Addons
 	private EntityManager entityManager;
 	private MouseInput mouse;
 
-	//Window Data
+	// Window Data
 	private static boolean running = false;
 	private final double ns = 1000000000.0 / TARGET_FPS;
 	public static final long serialVersionUUID = 1L;

@@ -5,19 +5,19 @@ import java.awt.Graphics;
 
 import com.cy4.Cy4Engine.render.point.Vector3;
 
-public class Tetrahedron {
+public class Polyhedron {
 
 	private Polygon3D[] polygons;
 	private Color color;
 	
-	public Tetrahedron(Color color, Polygon3D... polygons) {
+	public Polyhedron(Color color, Polygon3D... polygons) {
 		this.color = color;
 		this.polygons = polygons;
 		this.setPolygonColor();
 		this.sortPolygons();
 	}
 	
-	public Tetrahedron(Polygon3D... polygons) {
+	public Polyhedron(Polygon3D... polygons) {
 		this.color = Color.WHITE;
 		this.polygons = polygons;
 		this.sortPolygons();
