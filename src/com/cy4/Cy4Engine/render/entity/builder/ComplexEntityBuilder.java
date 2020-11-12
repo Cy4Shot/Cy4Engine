@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cy4.Cy4Engine.math.Vector3;
 import com.cy4.Cy4Engine.render.entity.Entity;
 import com.cy4.Cy4Engine.render.entity.IEntity;
-import com.cy4.Cy4Engine.render.point.Vector3;
-import com.cy4.Cy4Engine.render.shapes.Polygon3D;
-import com.cy4.Cy4Engine.render.shapes.Polyhedron;
+import com.cy4.Cy4Engine.render.poly.Polygon3D;
+import com.cy4.Cy4Engine.render.poly.Polyhedron;
 
 public class ComplexEntityBuilder {
 

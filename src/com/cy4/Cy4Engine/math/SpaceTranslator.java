@@ -1,4 +1,4 @@
-package com.cy4.Cy4Engine.render.point;
+package com.cy4.Cy4Engine.math;
 
 import java.awt.Point;
 

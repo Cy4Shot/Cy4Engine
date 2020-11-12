@@ -9,8 +9,8 @@ import java.util.List;
 
 import com.cy4.Cy4Engine.input.ClickType;
 import com.cy4.Cy4Engine.input.MouseInput;
+import com.cy4.Cy4Engine.math.Vector3;
 import com.cy4.Cy4Engine.render.entity.builder.ObjEntityBuilder;
-import com.cy4.Cy4Engine.render.point.Vector3;
 
 public class EntityManager {
 

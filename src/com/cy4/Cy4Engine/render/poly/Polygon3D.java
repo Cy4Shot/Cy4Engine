@@ -1,4 +1,4 @@
-package com.cy4.Cy4Engine.render.shapes;
+package com.cy4.Cy4Engine.render.poly;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,9 +9,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.cy4.Cy4Engine.math.SpaceTranslator;
+import com.cy4.Cy4Engine.math.Vector3;
 import com.cy4.Cy4Engine.render.Display;
-import com.cy4.Cy4Engine.render.point.SpaceTranslator;
-import com.cy4.Cy4Engine.render.point.Vector3;
 
 public class Polygon3D {
 	private Vector3[] points;

@@ -1,9 +1,9 @@
-package com.cy4.Cy4Engine.render.shapes;
+package com.cy4.Cy4Engine.render.poly;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-import com.cy4.Cy4Engine.render.point.Vector3;
+import com.cy4.Cy4Engine.math.Vector3;
 
 public class Polyhedron {
 
