@@ -13,6 +13,8 @@ import com.cy4.Cy4Engine.render.entity.EntityManager;
 
 @SuppressWarnings("serial")
 public class Display extends Canvas implements Runnable {
+	
+	public static Display instance;
 
 	// Settings
 	public static final int HEIGHT = 500;
@@ -28,8 +30,8 @@ public class Display extends Canvas implements Runnable {
 	private static String title = "Cy4 Engine Test";
 
 	// Addons
-	private EntityManager entityManager;
-	private MouseInput mouse;
+	public EntityManager entityManager;
+	public MouseInput mouse;
 
 	// Window Data
 	private static boolean running = false;
@@ -48,10 +50,13 @@ public class Display extends Canvas implements Runnable {
 		this.addMouseWheelListener(mouse);
 
 		this.entityManager = new EntityManager();
+		
 	}
 
 	public static void main(String[] args) {
 		Display display = new Display();
+		instance = display;
+		
 		display.frame.setTitle(title);
 		display.frame.add(display);
 		display.frame.pack();

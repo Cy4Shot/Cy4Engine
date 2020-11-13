@@ -25,8 +25,8 @@ public class EntityManager {
 //		this.entities.add(ComplexEntityBuilder.createRubiksCube(100, new Vector3(0, 0, 0), 2d));
 //		this.entities.add(BasicEntityBuilder.createPlane(100, new Vector3(0, 0, 0), Color.WHITE));
 //		this.entities.add(BasicEntityBuilder.createCube(100, new Vector3(0, 0, 0)));
-		this.entities.add(ObjEntityBuilder.readWavefront(new FileInputStream("./data/sample.obj"), 60,
-				new Vector3(0, 0, 0), Color.BLUE));
+		this.entities.add(
+				ObjEntityBuilder.readWavefront(new FileInputStream("./data/sample.obj"), 60, Vector3.zero, Color.BLUE));
 		this.setLighting();
 	}
 

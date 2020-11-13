@@ -3,6 +3,8 @@ package com.cy4.Cy4Engine.math;
 public class Vector3 {
 
 	public double x, y, z;
+	
+	public static Vector3 zero = new Vector3();
 
 	public Vector3() {
 		this.x = this.y = this.z = 0;

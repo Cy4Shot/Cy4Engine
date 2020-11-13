@@ -4,7 +4,7 @@ import java.awt.Point;
 
 import com.cy4.Cy4Engine.render.Display;
 
-public class SpaceTranslator {
+public class WorldToScreenSpace {
 
 	private static double scale = 1d;
 
