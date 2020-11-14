@@ -59,6 +59,10 @@ public class Polygon3D {
 	public void setColor(Color color) {
 		this.baseColor = color;
 	}
+	
+	public Vector3[] getPoints() {
+		return this.points;
+	}
 
 	public double getAverageX() {
 		double sum = 0;

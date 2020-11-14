@@ -2,7 +2,6 @@ package com.cy4.Cy4Engine.render.entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.List;
 import com.cy4.Cy4Engine.input.ClickType;
 import com.cy4.Cy4Engine.input.MouseInput;
 import com.cy4.Cy4Engine.math.Vector3;
-import com.cy4.Cy4Engine.render.entity.builder.ObjEntityBuilder;
+import com.cy4.Cy4Engine.render.entity.builder.BasicEntityBuilder;
 
 public class EntityManager {
 
@@ -25,8 +24,8 @@ public class EntityManager {
 //		this.entities.add(ComplexEntityBuilder.createRubiksCube(100, new Vector3(0, 0, 0), 2d));
 //		this.entities.add(BasicEntityBuilder.createPlane(100, new Vector3(0, 0, 0), Color.WHITE));
 //		this.entities.add(BasicEntityBuilder.createCube(100, new Vector3(0, 0, 0)));
-		this.entities.add(
-				ObjEntityBuilder.readWavefront(new FileInputStream("./data/sample.obj"), 60, Vector3.zero, Color.BLUE));
+//		this.entities.add(ObjEntityBuilder.readWavefront(new FileInputStream("./data/sample.obj"), 60, Vector3.zero, Color.BLUE));
+		this.entities.add(BasicEntityBuilder.createIcosphere(100, new Vector3(50, 0, 0), 2, Color.BLUE));
 		this.setLighting();
 	}
 
