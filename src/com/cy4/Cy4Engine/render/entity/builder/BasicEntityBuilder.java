@@ -49,7 +49,7 @@ public class BasicEntityBuilder {
 			points[2] = Vector3.multiply(points[2], size / Vector3.magnitude(points[2]));
 		}
 
-		for (int i = 0; i < recurstionDepth + 1; i++) {
+		for (int i = 0; i < recurstionDepth; i++) {
 			List<Polygon3D> newFaces = new ArrayList<Polygon3D>();
 			for (Polygon3D poly : faces) {
 				Vector3[] points = poly.getPoints();
