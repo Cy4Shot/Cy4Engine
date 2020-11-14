@@ -14,7 +14,7 @@ import com.cy4.Cy4Engine.render.entity.builder.BasicEntityBuilder;
 public class EntityManager {
 
 	List<IEntity> entities;
-	private Vector3 lightVector = Vector3.normalize(new Vector3(1, 1, 1));
+	private Vector3 lightVector = Vector3.normalize(new Vector3(-1, 1, -1));
 
 	public EntityManager() {
 		this.entities = new ArrayList<IEntity>();
@@ -22,10 +22,10 @@ public class EntityManager {
 
 	public void init() throws FileNotFoundException, Exception {
 //		this.entities.add(ComplexEntityBuilder.createRubiksCube(100, new Vector3(0, 0, 0), 2d));
-//		this.entities.add(BasicEntityBuilder.createPlane(100, new Vector3(0, 0, 0), Color.WHITE));
+//		this.entities.add(BasicEntityBuilder.createPlane(1000, new Vector3(0, 0, 0), Color.WHITE));
 //		this.entities.add(BasicEntityBuilder.createCube(100, new Vector3(0, 0, 0)));
 //		this.entities.add(ObjEntityBuilder.readWavefront(new FileInputStream("./data/sample.obj"), 60, Vector3.zero, Color.BLUE));
-		this.entities.add(BasicEntityBuilder.createIcosphere(100, new Vector3(0, 0, 0), 0, Color.BLUE));
+		this.entities.add(BasicEntityBuilder.createIcosphere(100, new Vector3(0, 0, 0), 2, Color.WHITE));
 		this.setLighting();
 	}
 
@@ -38,7 +38,7 @@ public class EntityManager {
 			int xDif = x - ix;
 			int yDif = y - iy;
 
-			this.rotate(new Vector3(0, 0, -xDif));
+			this.rotate(new Vector3(0, -yDif, -xDif));
 		}
 		if (m.getMouseButton() == ClickType.RIGHT_CLICK) {
 			int xDif = x - ix;

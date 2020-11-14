@@ -22,7 +22,6 @@ public class Entity implements IEntity {
 		}
 		this.polygons = new Polygon3D[temp.size()];
 		this.polygons = temp.toArray(this.polygons);
-		this.sortPolygons();
 	}
 
 	@Override
@@ -40,15 +39,15 @@ public class Entity implements IEntity {
 		this.sortPolygons();
 	}
 
-	private void sortPolygons() {
-		Polygon3D.sortPolygons(this.polygons);
-	}
-
 	@Override
 	public void setLighting(Vector3 lightVector) {
 		for (Polyhedron polyh : this.polyhedra) {
 			polyh.setLighting(lightVector);
 		}
+	}
+	
+	private void sortPolygons() {
+		Polygon3D.sortPolygons(this.polygons);
 	}
 
 }

@@ -15,7 +15,7 @@ import com.cy4.Cy4Engine.render.entity.EntityManager;
 public class Display extends Canvas implements Runnable {
 
 	// Settings
-	public static final int HEIGHT = 1280;
+	public static final int HEIGHT = 720;
 	public static final int WIDTH = 720;
 	public static final int TARGET_FPS = 100;
 	public static final double DEPTH_FACTOR = 1400;

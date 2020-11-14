@@ -11,5 +11,4 @@ public interface IEntity {
 	void rotate(Vector3 rot, Vector3 lightVector);
 
 	void setLighting(Vector3 lightVector);
-
 }
