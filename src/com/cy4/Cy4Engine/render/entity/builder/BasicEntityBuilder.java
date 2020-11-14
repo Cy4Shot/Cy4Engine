@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.cy4.Cy4Engine.math.SphereMath;
 import com.cy4.Cy4Engine.math.Vector3;
 import com.cy4.Cy4Engine.render.entity.Entity;
 import com.cy4.Cy4Engine.render.entity.IEntity;
@@ -37,56 +38,15 @@ public class BasicEntityBuilder {
 	}
 
 	public static IEntity createIcosphere(double size, Vector3 centre, int recurstionDepth, Color color) {
-		List<Vector3> vertices = new ArrayList<Vector3>();
-		List<Polygon3D> faces = new ArrayList<Polygon3D>();
-
-		double t = (1.0 + Math.sqrt(5.0)) / 2.0;
-
-		vertices.add(new Vector3(-1, t, 0));
-		vertices.add(new Vector3(1, t, 0));
-		vertices.add(new Vector3(-1, -t, 0));
-		vertices.add(new Vector3(1, -t, 0));
-
-		vertices.add(new Vector3(0, -1, t));
-		vertices.add(new Vector3(0, 1, t));
-		vertices.add(new Vector3(0, -1, -t));
-		vertices.add(new Vector3(0, 1, -t));
-
-		vertices.add(new Vector3(t, 0, -1));
-		vertices.add(new Vector3(t, 0, 1));
-		vertices.add(new Vector3(-t, 0, -1));
-		vertices.add(new Vector3(-t, 0, 1));
-
-		faces.add(new Polygon3D(vertices.get(0), vertices.get(11), vertices.get(5)));
-		faces.add(new Polygon3D(vertices.get(0), vertices.get(5), vertices.get(1)));
-		faces.add(new Polygon3D(vertices.get(0), vertices.get(1), vertices.get(7)));
-		faces.add(new Polygon3D(vertices.get(0), vertices.get(7), vertices.get(10)));
-		faces.add(new Polygon3D(vertices.get(0), vertices.get(10), vertices.get(11)));
-
-		faces.add(new Polygon3D(vertices.get(1), vertices.get(5), vertices.get(9)));
-		faces.add(new Polygon3D(vertices.get(5), vertices.get(11), vertices.get(4)));
-		faces.add(new Polygon3D(vertices.get(11), vertices.get(10), vertices.get(2)));
-		faces.add(new Polygon3D(vertices.get(10), vertices.get(7), vertices.get(6)));
-		faces.add(new Polygon3D(vertices.get(7), vertices.get(1), vertices.get(8)));
-
-		faces.add(new Polygon3D(vertices.get(3), vertices.get(9), vertices.get(4)));
-		faces.add(new Polygon3D(vertices.get(3), vertices.get(4), vertices.get(2)));
-		faces.add(new Polygon3D(vertices.get(3), vertices.get(2), vertices.get(6)));
-		faces.add(new Polygon3D(vertices.get(3), vertices.get(6), vertices.get(8)));
-		faces.add(new Polygon3D(vertices.get(3), vertices.get(8), vertices.get(9)));
-
-		faces.add(new Polygon3D(vertices.get(4), vertices.get(9), vertices.get(5)));
-		faces.add(new Polygon3D(vertices.get(2), vertices.get(4), vertices.get(11)));
-		faces.add(new Polygon3D(vertices.get(6), vertices.get(2), vertices.get(10)));
-		faces.add(new Polygon3D(vertices.get(8), vertices.get(6), vertices.get(7)));
-		faces.add(new Polygon3D(vertices.get(9), vertices.get(8), vertices.get(1)));
+		List<Polygon3D> faces = Arrays.asList(SphereMath.faces);
+		size *= SphereMath.t;
 
 		for (Polygon3D poly : faces) {
 			Vector3[] points = poly.getPoints();
 
-			points[0] = Vector3.multiply(points[0], size * t / Vector3.magnitude(points[0]));
-			points[1] = Vector3.multiply(points[1], size * t / Vector3.magnitude(points[1]));
-			points[2] = Vector3.multiply(points[2], size * t / Vector3.magnitude(points[2]));
+			points[0] = Vector3.multiply(points[0], size / Vector3.magnitude(points[0]));
+			points[1] = Vector3.multiply(points[1], size / Vector3.magnitude(points[1]));
+			points[2] = Vector3.multiply(points[2], size / Vector3.magnitude(points[2]));
 		}
 
 		for (int i = 0; i < recurstionDepth + 1; i++) {
@@ -94,9 +54,9 @@ public class BasicEntityBuilder {
 			for (Polygon3D poly : faces) {
 				Vector3[] points = poly.getPoints();
 
-				Vector3 a = getMiddlePoint(points[0], points[1], size * t);
-				Vector3 b = getMiddlePoint(points[1], points[2], size * t);
-				Vector3 c = getMiddlePoint(points[2], points[0], size * t);
+				Vector3 a = getMiddlePoint(points[0], points[1], size);
+				Vector3 b = getMiddlePoint(points[1], points[2], size);
+				Vector3 c = getMiddlePoint(points[2], points[0], size);
 
 				newFaces.add(new Polygon3D(points[0], a, c));
 				newFaces.add(new Polygon3D(points[1], b, a));
@@ -104,6 +64,10 @@ public class BasicEntityBuilder {
 				newFaces.add(new Polygon3D(a, b, c));
 			}
 			faces = newFaces;
+		}
+		
+		for (Polygon3D poly : faces) {
+			poly.translate(centre);
 		}
 
 		return new Entity(Arrays.asList(new Polyhedron(color, faces.toArray(new Polygon3D[0]))));

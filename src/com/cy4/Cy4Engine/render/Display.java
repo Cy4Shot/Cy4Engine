@@ -13,12 +13,10 @@ import com.cy4.Cy4Engine.render.entity.EntityManager;
 
 @SuppressWarnings("serial")
 public class Display extends Canvas implements Runnable {
-	
-	public static Display instance;
 
 	// Settings
-	public static final int HEIGHT = 500;
-	public static final int WIDTH = 500;
+	public static final int HEIGHT = 1280;
+	public static final int WIDTH = 720;
 	public static final int TARGET_FPS = 100;
 	public static final double DEPTH_FACTOR = 1400;
 	public static final boolean ORTHOGRAPHIC = false;
@@ -55,7 +53,6 @@ public class Display extends Canvas implements Runnable {
 
 	public static void main(String[] args) {
 		Display display = new Display();
-		instance = display;
 		
 		display.frame.setTitle(title);
 		display.frame.add(display);
@@ -70,6 +67,7 @@ public class Display extends Canvas implements Runnable {
 	public synchronized void start() {
 		running = true;
 		this.thread = new Thread(this, "Display");
+		this.createBufferStrategy(3);
 		this.thread.start();
 	}
 
@@ -122,14 +120,10 @@ public class Display extends Canvas implements Runnable {
 
 	private void render() {
 		BufferStrategy bs = this.getBufferStrategy();
-		if (bs == null) {
-			this.createBufferStrategy(3);
-			return;
-		}
 
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
+		g.fillRect(0, 0, WIDTH * WIDTH, HEIGHT * HEIGHT);
 
 		this.entityManager.render(g);
 
@@ -140,5 +134,4 @@ public class Display extends Canvas implements Runnable {
 	private void update() {
 		this.entityManager.update(this.mouse);
 	}
-
 }

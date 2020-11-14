@@ -22,11 +22,9 @@ public class WorldToScreenSpace {
 	}
 
 	private static double[] scale(double x3d, double y3d, double z3d) {
-		double dist = Math.sqrt(x3d * x3d + y3d * y3d);
+		double dist = Math.sqrt(x3d * x3d + y3d * y3d)
+				* (Display.ORTHOGRAPHIC ? 1 : Math.abs(Display.DEPTH_FACTOR / (15 - z3d + Display.DEPTH_FACTOR)));
 		double theta = Math.atan2(y3d, x3d);
-		double depth = 15 - z3d;
-		double localScale = Math.abs(Display.DEPTH_FACTOR / (depth + Display.DEPTH_FACTOR));
-		dist *= Display.ORTHOGRAPHIC ? 1 : localScale;
 		double[] newVal = new double[2];
 		newVal[0] = dist * Math.cos(theta);
 		newVal[1] = dist * Math.sin(theta);
@@ -35,24 +33,21 @@ public class WorldToScreenSpace {
 
 	public static void rotateAxisX(Vector3 p, double degrees) {
 		double radius = Math.sqrt(p.y * p.y + p.z * p.z);
-		double theta = Math.atan2(p.z, p.y);
-		theta += 2 * Math.PI / 360 * -degrees;
+		double theta = Math.atan2(p.z, p.y) + 2 * Math.PI / 360 * -degrees;
 		p.y = radius * Math.cos(theta);
 		p.z = radius * Math.sin(theta);
 	}
 
 	public static void rotateAxisY(Vector3 p, double degrees) {
 		double radius = Math.sqrt(p.x * p.x + p.z * p.z);
-		double theta = Math.atan2(p.x, p.z);
-		theta += 2 * Math.PI / 360 * -degrees;
+		double theta = Math.atan2(p.x, p.z) + 2 * Math.PI / 360 * -degrees;
 		p.x = radius * Math.sin(theta);
 		p.z = radius * Math.cos(theta);
 	}
 
 	public static void rotateAxisZ(Vector3 p, double degrees) {
 		double radius = Math.sqrt(p.y * p.y + p.x * p.x);
-		double theta = Math.atan2(p.y, p.x);
-		theta += 2 * Math.PI / 360 * -degrees;
+		double theta = Math.atan2(p.y, p.x) + 2 * Math.PI / 360 * -degrees;
 		p.y = radius * Math.sin(theta);
 		p.x = radius * Math.cos(theta);
 	}

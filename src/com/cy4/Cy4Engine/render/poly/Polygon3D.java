@@ -55,6 +55,14 @@ public class Polygon3D {
 
 		this.updateLightingRatio(lightV);
 	}
+	
+	public void translate(Vector3 amount) {
+		for (Vector3 p : points) {
+			p.x += amount.x;
+			p.y += amount.y;
+			p.z += amount.z;
+		}
+	}
 
 	public void setColor(Color color) {
 		this.baseColor = color;
