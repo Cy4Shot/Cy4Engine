@@ -23,9 +23,9 @@ public class BasicEntityBuilder {
 		Vector3 p6 = new Vector3(centre.x - size / 2, centre.y + size / 2, centre.z - size / 2);
 		Vector3 p7 = new Vector3(centre.x - size / 2, centre.y + size / 2, centre.z + size / 2);
 		Vector3 p8 = new Vector3(centre.x - size / 2, centre.y - size / 2, centre.z + size / 2);
-		Polyhedron polyh = new Polyhedron(new Polygon3D(c, p1, p2, p3, p4), new Polygon3D(c, p5, p6, p7, p8),
-				new Polygon3D(c, p1, p2, p6, p5), new Polygon3D(c, p1, p5, p8, p4), new Polygon3D(c, p2, p6, p7, p3),
-				new Polygon3D(c, p4, p3, p7, p8));
+		Polyhedron polyh = new Polyhedron(c, new Polygon3D(p1, p2, p3, p4), new Polygon3D(p5, p6, p7, p8),
+				new Polygon3D(p1, p2, p6, p5), new Polygon3D(p1, p5, p8, p4), new Polygon3D(p2, p6, p7, p3),
+				new Polygon3D(p4, p3, p7, p8));
 		return new Entity(Arrays.asList(polyh));
 	}
 
@@ -65,7 +65,7 @@ public class BasicEntityBuilder {
 			}
 			faces = newFaces;
 		}
-		
+
 		for (Polygon3D poly : faces) {
 			poly.translate(centre);
 		}
