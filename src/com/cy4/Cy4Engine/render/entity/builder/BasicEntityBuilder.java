@@ -54,9 +54,9 @@ public class BasicEntityBuilder {
 			for (Polygon3D poly : faces) {
 				Vector3[] points = poly.getPoints();
 
-				Vector3 a = getMiddlePoint(points[0], points[1], size);
-				Vector3 b = getMiddlePoint(points[1], points[2], size);
-				Vector3 c = getMiddlePoint(points[2], points[0], size);
+				Vector3 a = SphereMath.getMiddlePoint(points[0], points[1], size);
+				Vector3 b = SphereMath.getMiddlePoint(points[1], points[2], size);
+				Vector3 c = SphereMath.getMiddlePoint(points[2], points[0], size);
 
 				newFaces.add(new Polygon3D(points[0], a, c));
 				newFaces.add(new Polygon3D(points[1], b, a));
@@ -71,11 +71,6 @@ public class BasicEntityBuilder {
 		}
 
 		return new Entity(Arrays.asList(new Polyhedron(color, faces.toArray(new Polygon3D[0]))));
-	}
-
-	private static Vector3 getMiddlePoint(Vector3 p1, Vector3 p2, double t) {
-		Vector3 middle = new Vector3((p1.x + p2.x) / 2.0, (p1.y + p2.y) / 2.0, (p1.z + p2.z) / 2.0);
-		return Vector3.multiply(middle, t / Vector3.magnitude(middle));
 	}
 
 }
