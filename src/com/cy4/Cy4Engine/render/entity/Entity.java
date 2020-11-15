@@ -23,6 +23,7 @@ public class Entity implements IEntity {
 		}
 		this.polygons = new Polygon3D[temp.size()];
 		this.polygons = temp.toArray(this.polygons);
+		this.sortPolygons();
 	}
 
 	@Override
