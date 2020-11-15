@@ -41,15 +41,15 @@ public class Display extends Canvas implements Runnable {
 
 		Dimension size = new Dimension(HEIGHT, WIDTH);
 		this.setPreferredSize(size);
-		
+
 		this.input = new UserInput(this);
 		this.entityManager = new EntityManager();
-		
+
 	}
 
 	public static void main(String[] args) {
 		Display display = new Display();
-		
+
 		display.frame.setTitle(title);
 		display.frame.add(display);
 		display.frame.pack();

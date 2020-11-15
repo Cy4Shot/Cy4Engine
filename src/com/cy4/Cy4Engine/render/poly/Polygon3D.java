@@ -27,12 +27,7 @@ public class Polygon3D {
 	}
 
 	public Polygon3D(Vector3... points) {
-		this.baseColor = this.lightingColor = Color.WHITE;
-		this.points = new Vector3[points.length];
-		for (int i = 0; i < points.length; i++) {
-			Vector3 copy = points[i];
-			this.points[i] = new Vector3(copy.x, copy.y, copy.z);
-		}
+		this(Color.WHITE, points);
 	}
 
 	public void render(Graphics g, Vector3 offset) {
@@ -55,7 +50,7 @@ public class Polygon3D {
 
 		this.updateLightingRatio(lightV);
 	}
-	
+
 	public void translate(Vector3 amount) {
 		for (Vector3 p : points) {
 			p.x += amount.x;
@@ -67,7 +62,7 @@ public class Polygon3D {
 	public void setColor(Color color) {
 		this.baseColor = color;
 	}
-	
+
 	public Vector3[] getPoints() {
 		return this.points;
 	}
@@ -118,7 +113,7 @@ public class Polygon3D {
 		int red = (int) (this.baseColor.getRed() * lightRatio);
 		int green = (int) (this.baseColor.getGreen() * lightRatio);
 		int blue = (int) (this.baseColor.getBlue() * lightRatio);
-		
+
 		this.lightingColor = new Color(red, green, blue);
 	}
 }

@@ -28,7 +28,8 @@ public class EntityManager {
 	}
 
 	public void init(UserInput input) throws FileNotFoundException, Exception {
-		this.entities.add(WavefrontEntityBuilder.readWavefront(new FileInputStream("./data/sample.obj"), 60, Vector3.zero, Color.BLUE));
+		this.entities.add(WavefrontEntityBuilder.readWavefront(new FileInputStream("./data/sample.obj"), 60,
+				Vector3.zero, Color.BLUE));
 //		this.entities.add(BasicEntityBuilder.createIcosphere(100, new Vector3(0, 0, 0), 2, Color.WHITE));
 //		this.entities.add(ComplexEntityBuilder.createRubiksCube(100, Vector3.zero, 10));
 		this.setLighting();

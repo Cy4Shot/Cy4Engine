@@ -16,13 +16,14 @@ public class Entity implements IEntity {
 	private Vector3 centrePoint = Vector3.zero;
 
 	public Entity(List<Polyhedron> polyhedra) {
-		List<Polygon3D> temp = new ArrayList<Polygon3D>();
 		this.polyhedra = polyhedra;
+
+		List<Polygon3D> temp = new ArrayList<Polygon3D>();
 		for (Polyhedron polyh : this.polyhedra) {
 			temp.addAll(Arrays.asList(polyh.getPolygons()));
 		}
-		this.polygons = new Polygon3D[temp.size()];
-		this.polygons = temp.toArray(this.polygons);
+
+		this.polygons = temp.toArray(new Polygon3D[0]);
 		this.sortPolygons();
 	}
 
@@ -40,7 +41,7 @@ public class Entity implements IEntity {
 		}
 		this.sortPolygons();
 	}
-	
+
 	@Override
 	public void translate(Vector3 pos) {
 		this.centrePoint = Vector3.add(this.centrePoint, pos);
@@ -52,7 +53,7 @@ public class Entity implements IEntity {
 			polyh.setLighting(lightVector);
 		}
 	}
-	
+
 	private void sortPolygons() {
 		Polygon3D.sortPolygons(this.polygons);
 	}
