@@ -35,10 +35,10 @@ public class Polygon3D {
 		}
 	}
 
-	public void render(Graphics g) {
+	public void render(Graphics g, Vector3 offset) {
 		Polygon poly = new Polygon();
 		for (int i = 0; i < this.points.length; i++) {
-			Point p = WorldToScreenSpace.convertPoint(this.points[i]);
+			Point p = WorldToScreenSpace.convertPoint(Vector3.add(this.points[i], offset));
 			poly.addPoint(p.x, p.y);
 		}
 

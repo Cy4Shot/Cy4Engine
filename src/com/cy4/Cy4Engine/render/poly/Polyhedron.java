@@ -28,9 +28,15 @@ public class Polyhedron {
 	}
 	
 	
-	public void render(Graphics g) {
+	public void render(Graphics g, Vector3 offset) {
 		for (Polygon3D poly : this.polygons) {
-			poly.render(g);
+			poly.render(g, offset);
+		}
+	}
+	
+	public void translate(Vector3 pos) {
+		for (Polygon3D poly : this.polygons) {
+			poly.translate(pos);
 		}
 	}
 	

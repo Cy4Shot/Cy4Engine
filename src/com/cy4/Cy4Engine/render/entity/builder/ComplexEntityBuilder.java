@@ -16,13 +16,13 @@ public class ComplexEntityBuilder {
 		List<Polyhedron> polyhedra = new ArrayList<Polyhedron>();
 
 		for (int i = -1; i < 2; i++) {
-			double cubeCentreX = i * (size + cubeSpacing) + centre.x;
+			double cubeCentreX = i * (size + cubeSpacing);
 			for (int j = -1; j < 2; j++) {
-				double cubeCentreY = j * (size + cubeSpacing) + centre.y;
+				double cubeCentreY = j * (size + cubeSpacing);
 				for (int k = -1; k < 2; k++) {
 					if (i == 0 && j == 0 && k == 0)
 						continue;
-					double cubeCentreZ = k * (size + cubeSpacing) + centre.z;
+					double cubeCentreZ = k * (size + cubeSpacing);
 
 					Vector3 p1 = new Vector3(cubeCentreX - size / 2, cubeCentreY - size / 2, cubeCentreZ - size / 2);
 					Vector3 p2 = new Vector3(cubeCentreX - size / 2, cubeCentreY - size / 2, cubeCentreZ + size / 2);
@@ -44,7 +44,8 @@ public class ComplexEntityBuilder {
 				}
 			}
 		}
-
-		return new Entity(polyhedra);
+		Entity e = new Entity(polyhedra);
+		e.translate(centre);
+		return e;
 	}
 }

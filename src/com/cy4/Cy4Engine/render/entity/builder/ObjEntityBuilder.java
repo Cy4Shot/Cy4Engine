@@ -18,11 +18,11 @@ import de.javagl.obj.ObjUtils;
 
 public class ObjEntityBuilder {
 
-	public static IEntity readWavefront(InputStream file, double scale, Vector3 pos) throws Exception {
-		return ObjEntityBuilder.readWavefront(file, scale, pos, Color.PINK);
+	public static IEntity readWavefront(InputStream file, double scale, Vector3 centre) throws Exception {
+		return ObjEntityBuilder.readWavefront(file, scale, centre, Color.PINK);
 	}
 
-	public static IEntity readWavefront(InputStream file, double scale, Vector3 pos, Color color) throws Exception {
+	public static IEntity readWavefront(InputStream file, double scale, Vector3 centre, Color color) throws Exception {
 		Obj obj = ObjUtils.triangulate(ObjReader.read(file));
 
 		List<Polyhedron> polyhedra = new ArrayList<Polyhedron>();
@@ -48,7 +48,9 @@ public class ObjEntityBuilder {
 			polyhedra.add(new Polyhedron(color, polys.toArray(new Polygon3D[0])));
 		}
 
-		return new Entity(polyhedra);
+		Entity e = new Entity(polyhedra);
+		e.translate(centre);
+		return e;
 	}
 
 }

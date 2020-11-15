@@ -8,7 +8,7 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
-import com.cy4.Cy4Engine.input.MouseInput;
+import com.cy4.Cy4Engine.input.UserInput;
 import com.cy4.Cy4Engine.render.entity.EntityManager;
 
 @SuppressWarnings("serial")
@@ -29,7 +29,7 @@ public class Display extends Canvas implements Runnable {
 
 	// Addons
 	public EntityManager entityManager;
-	public MouseInput mouse;
+	public UserInput input;
 
 	// Window Data
 	private static boolean running = false;
@@ -41,12 +41,8 @@ public class Display extends Canvas implements Runnable {
 
 		Dimension size = new Dimension(HEIGHT, WIDTH);
 		this.setPreferredSize(size);
-
-		this.mouse = new MouseInput();
-		this.addMouseListener(mouse);
-		this.addMouseMotionListener(mouse);
-		this.addMouseWheelListener(mouse);
-
+		
+		this.input = new UserInput(this);
 		this.entityManager = new EntityManager();
 		
 	}
@@ -112,7 +108,7 @@ public class Display extends Canvas implements Runnable {
 
 	private void init() {
 		try {
-			this.entityManager.init();
+			this.entityManager.init(this.input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -132,6 +128,6 @@ public class Display extends Canvas implements Runnable {
 	}
 
 	private void update() {
-		this.entityManager.update(this.mouse);
+		this.entityManager.update();
 	}
 }

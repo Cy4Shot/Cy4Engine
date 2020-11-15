@@ -29,6 +29,10 @@ public class Vector3 {
 	public static Vector3 multiply(Vector3 v, double d) {
 		return new Vector3(v.x * d, v.y * d, v.z * d);
 	}
+	
+	public static Vector3 add(Vector3 a, Vector3 b) {
+		return new Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
+	}
 
 	public static double dot(Vector3 a, Vector3 b) {
 		return a.x * b.x + a.y * b.x + a.z * b.z;
