@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.cy4.Cy4Engine.math.WorldToScreenSpace;
+import com.cy4.Cy4Engine.math.ProjectionMath;
 import com.cy4.Cy4Engine.math.Vector3;
 import com.cy4.Cy4Engine.render.Display;
 
@@ -38,7 +38,7 @@ public class Polygon3D {
 	public void render(Graphics g, Vector3 offset) {
 		Polygon poly = new Polygon();
 		for (int i = 0; i < this.points.length; i++) {
-			Point p = WorldToScreenSpace.convertPoint(Vector3.add(this.points[i], offset));
+			Point p = ProjectionMath.convertPoint(Vector3.add(this.points[i], offset));
 			poly.addPoint(p.x, p.y);
 		}
 
@@ -48,9 +48,9 @@ public class Polygon3D {
 
 	public void rotate(Vector3 rot, Vector3 lightV) {
 		for (Vector3 p : points) {
-			WorldToScreenSpace.rotateAxisX(p, rot.x);
-			WorldToScreenSpace.rotateAxisY(p, rot.y);
-			WorldToScreenSpace.rotateAxisZ(p, rot.z);
+			ProjectionMath.rotateAxisX(p, rot.x);
+			ProjectionMath.rotateAxisY(p, rot.y);
+			ProjectionMath.rotateAxisZ(p, rot.z);
 		}
 
 		this.updateLightingRatio(lightV);

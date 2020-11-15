@@ -4,7 +4,7 @@ import java.awt.Point;
 
 import com.cy4.Cy4Engine.render.Display;
 
-public class WorldToScreenSpace {
+public class ProjectionMath {
 
 	private static double scale = 1d;
 

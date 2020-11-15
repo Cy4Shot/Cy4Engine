@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.cy4.Cy4Engine.math.SphereMath;
+import com.cy4.Cy4Engine.math.IcosphereData;
 import com.cy4.Cy4Engine.math.Vector3;
 import com.cy4.Cy4Engine.render.entity.Entity;
 import com.cy4.Cy4Engine.render.entity.IEntity;
@@ -43,8 +43,8 @@ public class BasicEntityBuilder {
 	}
 
 	public static IEntity createIcosphere(double size, Vector3 centre, int recurstionDepth, Color color) {
-		List<Polygon3D> faces = Arrays.asList(SphereMath.faces);
-		size *= SphereMath.t;
+		List<Polygon3D> faces = Arrays.asList(IcosphereData.faces);
+		size *= IcosphereData.t;
 
 		for (Polygon3D poly : faces) {
 			Vector3[] points = poly.getPoints();
@@ -59,9 +59,9 @@ public class BasicEntityBuilder {
 			for (Polygon3D poly : faces) {
 				Vector3[] points = poly.getPoints();
 
-				Vector3 a = SphereMath.getMiddlePoint(points[0], points[1], size);
-				Vector3 b = SphereMath.getMiddlePoint(points[1], points[2], size);
-				Vector3 c = SphereMath.getMiddlePoint(points[2], points[0], size);
+				Vector3 a = IcosphereData.getMiddlePoint(points[0], points[1], size);
+				Vector3 b = IcosphereData.getMiddlePoint(points[1], points[2], size);
+				Vector3 c = IcosphereData.getMiddlePoint(points[2], points[0], size);
 
 				newFaces.add(new Polygon3D(points[0], a, c));
 				newFaces.add(new Polygon3D(points[1], b, a));

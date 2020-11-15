@@ -2,7 +2,7 @@ package com.cy4.Cy4Engine.math;
 
 import com.cy4.Cy4Engine.render.poly.Polygon3D;
 
-public class SphereMath {
+public class IcosphereData {
 	public static final double t = (1.0 + Math.sqrt(5.0)) / 2.0;
 	
 	private static final Vector3[] vertices = new Vector3[] {

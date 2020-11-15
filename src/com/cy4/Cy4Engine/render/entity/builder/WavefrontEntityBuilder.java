@@ -16,10 +16,10 @@ import de.javagl.obj.ObjData;
 import de.javagl.obj.ObjReader;
 import de.javagl.obj.ObjUtils;
 
-public class ObjEntityBuilder {
+public class WavefrontEntityBuilder {
 
 	public static IEntity readWavefront(InputStream file, double scale, Vector3 centre) throws Exception {
-		return ObjEntityBuilder.readWavefront(file, scale, centre, Color.PINK);
+		return WavefrontEntityBuilder.readWavefront(file, scale, centre, Color.PINK);
 	}
 
 	public static IEntity readWavefront(InputStream file, double scale, Vector3 centre, Color color) throws Exception {
