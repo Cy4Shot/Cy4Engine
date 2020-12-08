@@ -1,1 +1,6 @@
+title: Cy4Engine
+logo: /assets/img/logo.png
+description: An Open Source Java GameEngine
+show_downloads: true
+google_analytics:
 theme: jekyll-theme-minimal
