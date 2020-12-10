@@ -6,4 +6,4 @@ It is currently still in early stages of development. Expect pre-releases in ear
 
 ## Find Out More
 
-You can learn more about the Cy4Engine project on the website <a href="https://www.Cy4Shot.github.io/cy4engine">here</a>.
+You can learn more about the Cy4Engine project on the website <a href="https://cy4shot.github.io/Cy4Engine/">here</a>.
