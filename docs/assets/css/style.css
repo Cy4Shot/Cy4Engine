@@ -1,5 +1,3 @@
-@import "{{ site.theme }}";
-
 ul.downloads {
   list-style:none;
   height:40px;
