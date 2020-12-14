@@ -35,6 +35,7 @@ public class Display extends Canvas implements Runnable {
 	private static boolean running = false;
 	private final double ns = 1000000000.0 / TARGET_FPS;
 	public static final long serialVersionUUID = 1L;
+	public static Display instance;
 
 	public Display() {
 		this.frame = new JFrame();
@@ -49,6 +50,7 @@ public class Display extends Canvas implements Runnable {
 
 	public static void main(String[] args) {
 		Display display = new Display();
+		Display.instance = display;
 
 		display.frame.setTitle(title);
 		display.frame.add(display);

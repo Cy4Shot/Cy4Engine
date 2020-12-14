@@ -10,15 +10,15 @@ public class Polyhedron {
 	private Polygon3D[] polygons;
 	private Color color;
 
-	public Polyhedron(Color color, Polygon3D... polygons) {
+	public Polyhedron(Color color, Vector3 offset, Polygon3D... polygons) {
 		this.color = color;
 		this.polygons = polygons;
 		this.setPolygonColor();
-		this.sortPolygons();
+		this.sortPolygons(offset);
 	}
 
-	public Polyhedron(Polygon3D... polygons) {
-		this(Color.WHITE, polygons);
+	public Polyhedron(Vector3 offset, Polygon3D... polygons) {
+		this(Color.WHITE, offset, polygons);
 	}
 
 	public Polygon3D[] getPolygons() {
@@ -31,17 +31,18 @@ public class Polyhedron {
 		}
 	}
 
-	public void translate(Vector3 pos) {
-		for (Polygon3D poly : this.polygons) {
-			poly.translate(pos);
-		}
-	}
+//	public void translate(Vector3 pos, Vector3 offset) {
+//		for (Polygon3D poly : this.polygons) {
+//			poly.translate(pos, offset);
+//		}
+//		this.sortPolygons(offset);
+//	}
 
-	public void rotate(Vector3 rot, Vector3 lightVector) {
+	public void rotate(Vector3 rot, Vector3 lightVector, Vector3 offset) {
 		for (Polygon3D p : polygons) {
-			p.rotate(rot, lightVector);
+			p.rotate(rot, lightVector, offset);
 		}
-		this.sortPolygons();
+		this.sortPolygons(offset);
 	}
 
 	public void setLighting(Vector3 lightVector) {
@@ -50,8 +51,14 @@ public class Polyhedron {
 		}
 	}
 
-	private void sortPolygons() {
-		Polygon3D.sortPolygons(this.polygons);
+	private void sortPolygons(Vector3 offset) {
+		Polygon3D.sortPolygons(this.polygons, offset);
+	}
+	
+	public void updateVisibility(Vector3 offset) {
+		for (Polygon3D poly : this.polygons) {
+			poly.updateVisibility(offset);
+		}
 	}
 
 	private void setPolygonColor() {

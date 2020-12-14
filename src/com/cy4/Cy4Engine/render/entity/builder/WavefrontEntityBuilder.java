@@ -45,7 +45,7 @@ public class WavefrontEntityBuilder {
 						new Polygon3D(color, points.get(faces[i]), points.get(faces[i + 1]), points.get(faces[i + 2])));
 			}
 
-			polyhedra.add(new Polyhedron(color, polys.toArray(new Polygon3D[0])));
+			polyhedra.add(new Polyhedron(color, centre, polys.toArray(new Polygon3D[0])));
 		}
 
 		Entity e = new Entity(polyhedra);

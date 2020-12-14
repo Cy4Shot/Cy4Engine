@@ -4,7 +4,7 @@ public class Vector3 {
 
 	public double x, y, z;
 
-	public static Vector3 zero = new Vector3();
+	public final static Vector3 zero = new Vector3();
 
 	public Vector3() {
 		this.x = this.y = this.z = 0;
@@ -49,5 +49,13 @@ public class Vector3 {
 	public static Vector3 normalize(Vector3 v) {
 		double magnitude = Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 		return new Vector3(v.x / magnitude, v.y / magnitude, v.z / magnitude);
+	}
+	
+	public static double dist(Vector3 a, Vector3 b) {
+		double x = Math.pow(a.x - b.x, 2);
+		double y = Math.pow(a.y - b.y, 2);
+		double z = Math.pow(a.z - b.z, 2);
+		return Math.sqrt(x + y + z);
+		
 	}
 }

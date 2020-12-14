@@ -37,7 +37,7 @@ public class Entity implements IEntity {
 	@Override
 	public void rotate(Vector3 rot, Vector3 lightVector) {
 		for (Polyhedron polyh : this.polyhedra) {
-			polyh.rotate(rot, lightVector);
+			polyh.rotate(rot, lightVector, this.centrePoint);
 		}
 		this.sortPolygons();
 	}
@@ -45,6 +45,8 @@ public class Entity implements IEntity {
 	@Override
 	public void translate(Vector3 pos) {
 		this.centrePoint = Vector3.add(this.centrePoint, pos);
+		this.updateVisibility(this.centrePoint);
+		this.sortPolygons();
 	}
 
 	@Override
@@ -55,6 +57,12 @@ public class Entity implements IEntity {
 	}
 
 	private void sortPolygons() {
-		Polygon3D.sortPolygons(this.polygons);
+		Polygon3D.sortPolygons(this.polygons, this.centrePoint);
+	}
+	
+	private void updateVisibility(Vector3 offset) {
+		for (Polyhedron polyh : this.polyhedra) {
+			polyh.updateVisibility(offset);
+		}
 	}
 }

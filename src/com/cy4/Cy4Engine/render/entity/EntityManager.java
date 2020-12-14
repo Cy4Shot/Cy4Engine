@@ -3,7 +3,6 @@ package com.cy4.Cy4Engine.render.entity;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 import com.cy4.Cy4Engine.input.ClickType;
 import com.cy4.Cy4Engine.input.UserInput;
 import com.cy4.Cy4Engine.math.Vector3;
-import com.cy4.Cy4Engine.render.entity.builder.WavefrontEntityBuilder;
+import com.cy4.Cy4Engine.render.entity.builder.BasicEntityBuilder;
 
 public class EntityManager {
 
@@ -20,18 +19,23 @@ public class EntityManager {
 	private UserInput input;
 	private Camera camera;
 
-	private static double movementSpeed = 5d;
+	private static double movementSpeed = 10d;
 
 	public EntityManager() {
 		this.entities = new ArrayList<IEntity>();
 		this.camera = new Camera(Vector3.zero);
 	}
+	
+	public Camera getCamera() {
+		return this.camera;
+	}
 
 	public void init(UserInput input) throws FileNotFoundException, Exception {
-		this.entities.add(WavefrontEntityBuilder.readWavefront(new FileInputStream("./data/sample.obj"), 60,
-				Vector3.zero, Color.BLUE));
-//		this.entities.add(BasicEntityBuilder.createIcosphere(100, new Vector3(0, 0, 0), 2, Color.WHITE));
+//		this.entities.add(WavefrontEntityBuilder.readWavefront(new FileInputStream("./data/sample.obj"), 60,
+//				Vector3.zero, Color.BLUE));
+		this.entities.add(BasicEntityBuilder.createIcosphere(100, new Vector3(0, 0, 0), 2, Color.WHITE));
 //		this.entities.add(ComplexEntityBuilder.createRubiksCube(100, Vector3.zero, 10));
+//		this.entities.add(BasicEntityBuilder.createCube(100, Vector3.zero, Color.BLUE));
 		this.setLighting();
 		this.input = input;
 	}

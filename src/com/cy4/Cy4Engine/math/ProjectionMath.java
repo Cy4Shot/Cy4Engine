@@ -6,7 +6,7 @@ import com.cy4.Cy4Engine.render.Display;
 
 public class ProjectionMath {
 
-	private static double scale = 1d;
+	private final static double scale = 6d;
 
 	public static Point convertPoint(Vector3 p) {
 		double x3d = p.y * scale;

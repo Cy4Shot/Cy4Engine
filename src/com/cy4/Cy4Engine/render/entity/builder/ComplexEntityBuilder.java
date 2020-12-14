@@ -40,7 +40,7 @@ public class ComplexEntityBuilder {
 					Polygon3D poly5 = new Polygon3D(Color.ORANGE, p1, p3, p4, p2);
 					Polygon3D poly6 = new Polygon3D(Color.YELLOW, p1, p5, p7, p3);
 
-					polyhedra.add(new Polyhedron(poly1, poly2, poly3, poly4, poly5, poly6));
+					polyhedra.add(new Polyhedron(centre, poly1, poly2, poly3, poly4, poly5, poly6));
 				}
 			}
 		}

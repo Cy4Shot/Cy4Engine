@@ -23,7 +23,7 @@ public class BasicEntityBuilder {
 		Vector3 p6 = new Vector3(-size / 2, +size / 2, -size / 2);
 		Vector3 p7 = new Vector3(-size / 2, +size / 2, +size / 2);
 		Vector3 p8 = new Vector3(-size / 2, -size / 2, +size / 2);
-		Polyhedron polyh = new Polyhedron(c, new Polygon3D(p1, p2, p3, p4), new Polygon3D(p5, p6, p7, p8),
+		Polyhedron polyh = new Polyhedron(c, centre, new Polygon3D(p1, p2, p3, p4), new Polygon3D(p5, p6, p7, p8),
 				new Polygon3D(p1, p2, p6, p5), new Polygon3D(p1, p5, p8, p4), new Polygon3D(p2, p6, p7, p3),
 				new Polygon3D(p4, p3, p7, p8));
 
@@ -37,7 +37,7 @@ public class BasicEntityBuilder {
 		Vector3 p2 = new Vector3(+size / 2, -size / 2, 0);
 		Vector3 p3 = new Vector3(-size / 2, +size / 2, 0);
 		Vector3 p4 = new Vector3(+size / 2, +size / 2, 0);
-		Entity e = new Entity(Arrays.asList(new Polyhedron(new Polygon3D(c, p4, p3, p1, p2))));
+		Entity e = new Entity(Arrays.asList(new Polyhedron(centre, new Polygon3D(c, p4, p3, p1, p2))));
 		e.translate(centre);
 		return e;
 	}
@@ -70,7 +70,7 @@ public class BasicEntityBuilder {
 			faces = newFaces;
 		}
 
-		Entity e = new Entity(Arrays.asList(new Polyhedron(color, faces.toArray(new Polygon3D[0]))));
+		Entity e = new Entity(Arrays.asList(new Polyhedron(color, centre, faces.toArray(new Polygon3D[0]))));
 		e.translate(centre);
 		return e;
 	}
