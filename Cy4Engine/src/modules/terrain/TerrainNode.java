@@ -3,6 +3,7 @@ package modules.terrain;
 import core.buffers.PatchVBO;
 import core.configs.Default;
 import core.kernel.Camera;
+import core.kernel.RenderContext;
 import core.math.Vec2f;
 import core.math.Vec3f;
 import core.rendering.RenderInfo;
@@ -47,7 +48,12 @@ public class TerrainNode extends GameObject {
 		renderer.setVbo(buffer);
 		renderer.setInfo(new RenderInfo(new Default(), TerrainShader.getInstance()));
 
+		Renderer wireframerenderer = new Renderer();
+		wireframerenderer.setVbo(buffer);
+		wireframerenderer.setInfo(new RenderInfo(new Default(), TerrainWireframeShader.getInstance()));
+
 		addComponent(Constants.RENDERER_COMPONENT, renderer);
+		addComponent(Constants.WIREFRAME_RENDERER_COMPONENT, wireframerenderer);
 
 		computeWorldPos();
 		updateQuadtree();
@@ -55,7 +61,11 @@ public class TerrainNode extends GameObject {
 
 	public void render() {
 		if (isleaf) {
-			getComponents().get(Constants.RENDERER_COMPONENT).render();
+			if (RenderContext.getInstance().isWireframe()) {
+				getComponents().get(Constants.WIREFRAME_RENDERER_COMPONENT).render();
+			} else {
+				getComponents().get(Constants.RENDERER_COMPONENT).render();
+			}
 		}
 
 		for (Node node : getChildren()) {
@@ -64,12 +74,6 @@ public class TerrainNode extends GameObject {
 	}
 
 	public void updateQuadtree() {
-
-		if (Camera.getInstance().getPosition().getY() > (config.getScaleY())) {
-			worldPos.setY(config.getScaleY());
-		} else
-			worldPos.setY(Camera.getInstance().getPosition().getY());
-
 		updateChildNodes();
 
 		for (Node node : getChildren()) {
@@ -116,8 +120,47 @@ public class TerrainNode extends GameObject {
 	public void computeWorldPos() {
 
 		Vec2f loc = location.add(gap / 2f).mul(config.getScaleXZ()).sub(config.getScaleXZ() / 2f);
+		float z = getTerrainHeight(loc.getX(), loc.getY());
+		this.worldPos = new Vec3f(loc.getX(), z, loc.getY());
+	}
 
-		this.worldPos = new Vec3f(loc.getX(), 0, loc.getY());
+	public float getTerrainHeight(float x, float z) {
+		float h = 0;
+
+		Vec2f pos = new Vec2f(x, z);
+		pos = pos.add(config.getScaleXZ() / 2f);
+		pos = pos.div(config.getScaleXZ());
+
+		Vec2f floor = new Vec2f((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY()));
+		pos = pos.sub(floor);
+		pos = pos.mul(config.getHeightmap().getWidth());
+
+		int x0 = (int) Math.floor(pos.getX());
+		int x1 = x0 + 1;
+		int z0 = (int) Math.floor(pos.getY());
+		int z1 = z0 + 1;
+
+		float h0 = config.getHeightmapDataBuffer().get(config.getHeightmap().getWidth() * z0 + x0);
+		float h1 = config.getHeightmapDataBuffer().get(config.getHeightmap().getWidth() * z0 + x1);
+		float h2 = config.getHeightmapDataBuffer().get(config.getHeightmap().getWidth() * z1 + x0);
+		float h3 = config.getHeightmapDataBuffer().get(config.getHeightmap().getWidth() * z1 + x1);
+
+		float pU = pos.getX() - x0;
+		float pV = pos.getY() - z0;
+		float dU, dV;
+
+		if (pU > pV) {
+			dU = h1 - h0;
+			dV = h3 - h1;
+		} else {
+			dU = h3 - h2;
+			dV = h2 - h0;
+		}
+
+		h = h0 + (dU * pU) + (dV * pV);
+		h *= config.getScaleY();
+
+		return h;
 	}
 
 	public Vec3f getWorldPos() {

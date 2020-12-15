@@ -1,7 +1,6 @@
 package modules.terrain;
 
 import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
-import static org.lwjgl.opengl.GL13.GL_TEXTURE1;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE2;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
 
@@ -10,28 +9,25 @@ import core.scene.GameObject;
 import core.shaders.Shader;
 import core.utils.ResourceLoader;
 
-public class TerrainShader extends Shader {
+public class TerrainWireframeShader extends Shader {
+	private static TerrainWireframeShader instance = null;
 
-	private static TerrainShader instance = null;
-
-	public static TerrainShader getInstance() {
+	public static TerrainWireframeShader getInstance() {
 
 		if (instance == null) {
 
-			instance = new TerrainShader();
+			instance = new TerrainWireframeShader();
 		}
 		return instance;
 	}
 
-	protected TerrainShader() {
-
-		super();
+	protected TerrainWireframeShader() {
 
 		addVertexShader(ResourceLoader.loadShader("shaders/terrain/terrain_VS.glsl"));
 		addTessellationControlShader(ResourceLoader.loadShader("shaders/terrain/terrain_TC.glsl"));
 		addTessellationEvaluationShader(ResourceLoader.loadShader("shaders/terrain/terrain_TE.glsl"));
-		addGeometryShader(ResourceLoader.loadShader("shaders/terrain/terrain_GS.glsl"));
-		addFragmentShader(ResourceLoader.loadShader("shaders/terrain/terrain_FS.glsl"));
+		addGeometryShader(ResourceLoader.loadShader("shaders/terrain/wireframe_GS.glsl"));
+		addFragmentShader(ResourceLoader.loadShader("shaders/terrain/wireframe_FS.glsl"));
 
 		compileShader();
 
@@ -51,7 +47,6 @@ public class TerrainShader extends Shader {
 		addUniform("tessellationShift");
 
 		addUniform("heightmap");
-		addUniform("normalmap");
 		addUniform("splatmap");
 
 		for (int i = 0; i < 8; i++) {
@@ -61,8 +56,6 @@ public class TerrainShader extends Shader {
 		addUniform("tbn_range");
 
 		for (int i = 0; i < 3; i++) {
-			addUniform("materials[" + i + "].diffusemap");
-			addUniform("materials[" + i + "].normalmap");
 			addUniform("materials[" + i + "].heightmap");
 			addUniform("materials[" + i + "].heightScaling");
 			addUniform("materials[" + i + "].horizontalScaling");
@@ -87,10 +80,6 @@ public class TerrainShader extends Shader {
 		terrainNode.getConfig().getHeightmap().bind();
 		setUniformi("heightmap", 0);
 
-		glActiveTexture(GL_TEXTURE1);
-		terrainNode.getConfig().getNormalmap().bind();
-		setUniformi("normalmap", 1);
-
 		glActiveTexture(GL_TEXTURE2);
 		terrainNode.getConfig().getSplatmap().bind();
 		setUniformi("splatmap", 2);
@@ -108,20 +97,9 @@ public class TerrainShader extends Shader {
 
 		int texUnit = 3;
 		for (int i = 0; i < 3; i++) {
-
-			glActiveTexture(GL_TEXTURE0 + texUnit);
-			terrainNode.getConfig().getMaterials().get(i).getDiffusemap().bind();
-			setUniformi("materials[" + i + "].diffusemap", texUnit);
-			texUnit++;
-
 			glActiveTexture(GL_TEXTURE0 + texUnit);
 			terrainNode.getConfig().getMaterials().get(i).getDisplacemap().bind();
 			setUniformi("materials[" + i + "].heightmap", texUnit);
-			texUnit++;
-
-			glActiveTexture(GL_TEXTURE0 + texUnit);
-			terrainNode.getConfig().getMaterials().get(i).getNormalmap().bind();
-			setUniformi("materials[" + i + "].normalmap", texUnit);
 			texUnit++;
 
 			setUniformf("materials[" + i + "].heightScaling",

@@ -2,6 +2,7 @@ package modules.sky;
 
 import core.buffers.MeshVBO;
 import core.configs.CCW;
+import core.kernel.RenderContext;
 import core.math.Vec3f;
 import core.model.Mesh;
 import core.rendering.RenderInfo;
@@ -22,5 +23,12 @@ public class Skydome extends GameObject {
 		addComponent(Constants.RENDERER_COMPONENT, renderer);
 
 		getTransform().setScale(new Vec3f(Constants.ZFAR * 0.5f, Constants.ZFAR * 0.5f, Constants.ZFAR * 0.5f));
+	}
+	
+	@Override
+	public void render() {
+		if (!RenderContext.getInstance().isWireframe()) {
+			super.render();
+		}
 	}
 }

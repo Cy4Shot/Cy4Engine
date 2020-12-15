@@ -2,13 +2,18 @@ package modules.terrain;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import core.model.Material;
 import core.texturing.Texture2D;
+import core.utils.BufferUtil;
 import core.utils.Util;
 import modules.gpgpu.NormalMapRenderer;
+import modules.gpgpu.SplatMapRenderer;
 
 public class TerrainConfig {
 
@@ -17,6 +22,9 @@ public class TerrainConfig {
 
 	private Texture2D heightmap;
 	private Texture2D normalmap;
+	private Texture2D splatmap;
+	
+	private FloatBuffer heightmapDataBuffer;
 
 	private int tessellationFactor;
 	private float tessellationSlope;
@@ -53,11 +61,17 @@ public class TerrainConfig {
 					setHeightmap(new Texture2D(tokens[1]));
 					getHeightmap().bind();
 					getHeightmap().bilinearFilter();
+					
+					createHeightmapDataBuffer();
 
 					NormalMapRenderer normalRenderer = new NormalMapRenderer(getHeightmap().getWidth());
-					normalRenderer.setStrength(100);
+					normalRenderer.setStrength(60);
 					normalRenderer.render(getHeightmap());
 					setNormalmap(normalRenderer.getNormalmap());
+					
+					SplatMapRenderer splatmapRenderer = new SplatMapRenderer(getHeightmap().getWidth());
+					splatmapRenderer.render(getNormalmap());
+					setSplatmap(splatmapRenderer.getSplatmap());
 				}
 				if (tokens[0].equals("tessellationFactor")) {
 					setTessellationFactor(Integer.valueOf(tokens[1]));
@@ -145,6 +159,12 @@ public class TerrainConfig {
 		this.lod_range[index] = lod_range;
 		lod_morphing_area[index] = lod_range - updateMorphingArea(index + 1);
 	}
+	
+	public void createHeightmapDataBuffer() {
+		heightmapDataBuffer = BufferUtil.createFloatBuffer(getHeightmap().getWidth() * getHeightmap().getHeight());
+		heightmap.bind();
+		GL11.glGetTexImage(GL11.GL_TEXTURE_2D, 0, GL11.GL_RED, GL11.GL_FLOAT, heightmapDataBuffer);
+	}
 
 	public int[] getLod_morphing_area() {
 		return lod_morphing_area;
@@ -208,6 +228,22 @@ public class TerrainConfig {
 
 	public void setMaterials(List<Material> materials) {
 		this.materials = materials;
+	}
+
+	public Texture2D getSplatmap() {
+		return splatmap;
+	}
+
+	public void setSplatmap(Texture2D splatmap) {
+		this.splatmap = splatmap;
+	}
+
+	public FloatBuffer getHeightmapDataBuffer() {
+		return heightmapDataBuffer;
+	}
+
+	public void setHeightmapDataBuffer(FloatBuffer heightmapDataBuffer) {
+		this.heightmapDataBuffer = heightmapDataBuffer;
 	}
 
 }

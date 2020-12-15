@@ -1,5 +1,7 @@
 package core.kernel;
 
+import org.lwjgl.glfw.GLFW;
+
 import core.configs.Default;
 import modules.sky.Skydome;
 import modules.terrain.Terrain;
@@ -29,11 +31,11 @@ public class RenderingEngine {
 
 	public void render() {
 		Camera.getInstance().update();
-		
+
 		Default.clearScreen();
-		
+
 		sky.render();
-		
+
 		terrain.updateQuadtree();
 		terrain.render();
 
@@ -42,6 +44,12 @@ public class RenderingEngine {
 	}
 
 	public void update() {
+		if (Input.getInstance().isKeyPushed(GLFW.GLFW_KEY_E)) {
+			if (RenderContext.getInstance().isWireframe())
+				RenderContext.getInstance().setWireframe(false);
+			else
+				RenderContext.getInstance().setWireframe(true);
+		}
 	}
 
 	public void shutdown() {
