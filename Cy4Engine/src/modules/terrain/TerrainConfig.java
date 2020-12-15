@@ -2,7 +2,10 @@ package modules.terrain;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
+import core.model.Material;
 import core.texturing.Texture2D;
 import core.utils.Util;
 import modules.gpgpu.NormalMapRenderer;
@@ -18,9 +21,12 @@ public class TerrainConfig {
 	private int tessellationFactor;
 	private float tessellationSlope;
 	private float tessellationShift;
+	private int tbn_range;
 
 	private int[] lod_range = new int[8];
 	private int[] lod_morphing_area = new int[8];
+
+	private List<Material> materials = new ArrayList<Material>();
 
 	public void loadFile(String file) {
 		BufferedReader reader = null;
@@ -49,7 +55,7 @@ public class TerrainConfig {
 					getHeightmap().bilinearFilter();
 
 					NormalMapRenderer normalRenderer = new NormalMapRenderer(getHeightmap().getWidth());
-					normalRenderer.setStrength(8);
+					normalRenderer.setStrength(100);
 					normalRenderer.render(getHeightmap());
 					setNormalmap(normalRenderer.getNormalmap());
 				}
@@ -61,6 +67,9 @@ public class TerrainConfig {
 				}
 				if (tokens[0].equals("tessellationShift")) {
 					setTessellationShift(Float.valueOf(tokens[1]));
+				}
+				if (tokens[0].equals("tbn_range")) {
+					setTbn_range(Integer.valueOf(tokens[1]));
 				}
 				if (tokens[0].equals("#lod_ranges")) {
 					for (int i = 0; i < 8; i++) {
@@ -76,6 +85,33 @@ public class TerrainConfig {
 							}
 						}
 					}
+				}
+				if (tokens[0].equals("material")) {
+					getMaterials().add(new Material());
+				}
+				if (tokens[0].equals("material_DIF")) {
+					Texture2D diffuseMap = new Texture2D(tokens[1]);
+					diffuseMap.bind();
+					diffuseMap.trilinearFilter();
+					getMaterials().get(materials.size() - 1).setDiffusemap(diffuseMap);
+				}
+				if (tokens[0].equals("material_NRM")) {
+					Texture2D normalMap = new Texture2D(tokens[1]);
+					normalMap.bind();
+					normalMap.trilinearFilter();
+					getMaterials().get(materials.size() - 1).setNormalmap(normalMap);
+				}
+				if (tokens[0].equals("material_DSP")) {
+					Texture2D displacementMap = new Texture2D(tokens[1]);
+					displacementMap.bind();
+					displacementMap.trilinearFilter();
+					getMaterials().get(materials.size() - 1).setDisplacemap(displacementMap);
+				}
+				if (tokens[0].equals("material_heightScaling")) {
+					getMaterials().get(materials.size() - 1).setDisplaceScale(Float.valueOf(tokens[1]));
+				}
+				if (tokens[0].equals("material_horizontalScaling")) {
+					getMaterials().get(materials.size() - 1).setHorizontalScale(Float.valueOf(tokens[1]));
 				}
 			}
 			reader.close();
@@ -156,6 +192,22 @@ public class TerrainConfig {
 
 	public void setNormalmap(Texture2D normalmap) {
 		this.normalmap = normalmap;
+	}
+
+	public int getTbn_range() {
+		return tbn_range;
+	}
+
+	public void setTbn_range(int tbn_range) {
+		this.tbn_range = tbn_range;
+	}
+
+	public List<Material> getMaterials() {
+		return materials;
+	}
+
+	public void setMaterials(List<Material> materials) {
+		this.materials = materials;
 	}
 
 }

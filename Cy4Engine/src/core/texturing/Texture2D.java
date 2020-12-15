@@ -6,6 +6,7 @@ import static org.lwjgl.opengl.GL11.glDeleteTextures;
 import static org.lwjgl.opengl.GL11.glGenTextures;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL30;
 
 import core.utils.ImageLoader;
 
@@ -49,6 +50,12 @@ public class Texture2D {
 	public void bilinearFilter() {
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
+	}
+	
+	public void trilinearFilter() {
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+		GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
 	}
 
 	public int getId() {
