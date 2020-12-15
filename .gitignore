@@ -16,3 +16,4 @@ target/
 .gitattributes
 .classpath
 .project
+.metadata
