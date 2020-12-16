@@ -6,7 +6,6 @@ import engine.core.configs.Default;
 import engine.core.scene.Scenegraph;
 import engine.modules.sky.Skydome;
 import engine.modules.terrain.Terrain;
-import engine.modules.water.Ocean;
 
 /**
  * 
@@ -18,7 +17,6 @@ public class RenderingEngine {
 
 	private Window window;
 	private Skydome sky;
-	public Ocean ocean;
 	private Terrain terrain;
 	private Scenegraph sceneGraph;
 
@@ -35,15 +33,12 @@ public class RenderingEngine {
 		sceneGraph = new Scenegraph();
 		sky = new Skydome();
 		terrain = new Terrain();
-		ocean = new Ocean();
 	}
 
 	public void init() {
 
 		window.init();
 		terrain.init("./res/settings/terrain_settings.txt");
-		ocean.initShaderBuffer();
-		sceneGraph.addObject(ocean);
 		sceneGraph.addObject(terrain);
 		sceneGraph.addObject(sky);
 	}
@@ -57,8 +52,6 @@ public class RenderingEngine {
 
 		terrain.updateQuadtree();
 		terrain.render();
-		
-		ocean.render();
 
 		window.render();
 	}
