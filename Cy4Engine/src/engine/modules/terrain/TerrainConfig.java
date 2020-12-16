@@ -60,7 +60,7 @@ public class TerrainConfig {
 				if (tokens[0].equals("heightmap")) {
 					setHeightmap(new Texture2D(tokens[1]));
 					getHeightmap().bind();
-					getHeightmap().bilinearFilter();
+					getHeightmap().trilinearFilter();
 					
 					createHeightmapDataBuffer();
 
