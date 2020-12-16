@@ -1,9 +1,9 @@
 package modules.terrain;
 
 import core.kernel.Camera;
-import core.scene.Node;
+import core.scene.GameObject;
 
-public class Terrain extends Node {
+public class Terrain extends GameObject {
 
 	private TerrainConfig configuration;
 

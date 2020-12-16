@@ -1,0 +1,60 @@
+{
+	"colors": [
+		{
+			"name": "control",
+			"color": "#1d1f21"
+		},
+		{
+			"name": "info",
+			"color": "#1d1f21"
+		},
+		{
+			"name": "nimbusBase",
+			"color": "#1d1f21"
+		},
+		{
+			"name": "nimbusAlertYellow",
+			"color": "#f0c674"
+		},
+		{
+			"name": "nimbusDisabledText",
+			"color": "#969896"
+		},
+		{
+			"name": "nimbusFocus",
+			"color": "#373b41"
+		},
+		{
+			"name": "nimbusGreen",
+			"color": "#b5bd68"
+		},
+		{
+			"name": "nimbusInfoBlue",
+			"color": "#81a2be"
+		},
+		{
+			"name": "nimbusLightBackground",
+			"color": "#1d1f21"
+		},
+		{
+			"name": "nimbusOrange",
+			"color": "#de935f"
+		},
+		{
+			"name": "nimbusRed",
+			"color": "#cc6666"
+		},
+		{
+			"name": "nimbusSelectedText",
+			"color": "#373b41"
+		},
+		{
+			"name": "nimbusSelectionBackground",
+			"color": "#c5c8c6"
+		},
+		{
+			"name": "text",
+			"color": "#282a2e"
+		}
+	]
+}

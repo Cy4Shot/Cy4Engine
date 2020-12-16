@@ -156,4 +156,14 @@ public class CoreEngine {
 	public static void setFps(int fps) {
 		CoreEngine.fps = fps;
 	}
+
+	public RenderingEngine getRenderingEngine() {
+		return renderingEngine;
+	}
+
+	public void setRenderingEngine(RenderingEngine renderingEngine) {
+		this.renderingEngine = renderingEngine;
+	}
+	
+	
 }

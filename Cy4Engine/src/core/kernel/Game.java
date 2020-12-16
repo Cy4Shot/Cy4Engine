@@ -2,6 +2,8 @@ package core.kernel;
 
 public class Game {
 	
+	private int samples = 5;
+	
 	protected CoreEngine engine;
 	
 	public Game(){
@@ -21,5 +23,13 @@ public class Game {
 	}
 	public void setEngine(CoreEngine engine) {
 		this.engine = engine;
+	}
+
+	public int getSamples() {
+		return samples;
+	}
+
+	public void setSamples(int samples) {
+		this.samples = samples;
 	}
 }

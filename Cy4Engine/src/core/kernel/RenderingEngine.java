@@ -3,8 +3,10 @@ package core.kernel;
 import org.lwjgl.glfw.GLFW;
 
 import core.configs.Default;
+import core.scene.Scenegraph;
 import modules.sky.Skydome;
 import modules.terrain.Terrain;
+import modules.water.Ocean;
 
 /**
  * 
@@ -16,17 +18,34 @@ public class RenderingEngine {
 
 	private Window window;
 	private Skydome sky;
+	public Ocean ocean;
 	private Terrain terrain;
+	private Scenegraph sceneGraph;
+
+	public Scenegraph getSceneGraph() {
+		return sceneGraph;
+	}
+
+	public void setSceneGraph(Scenegraph sceneGraph) {
+		this.sceneGraph = sceneGraph;
+	}
 
 	public RenderingEngine() {
 		window = Window.getInstance();
+		sceneGraph = new Scenegraph();
 		sky = new Skydome();
 		terrain = new Terrain();
+		ocean = new Ocean();
 	}
 
 	public void init() {
+
 		window.init();
 		terrain.init("./res/settings/terrain_settings.txt");
+		ocean.initShaderBuffer();
+		sceneGraph.addObject(ocean);
+		sceneGraph.addObject(terrain);
+		sceneGraph.addObject(sky);
 	}
 
 	public void render() {
@@ -38,8 +57,9 @@ public class RenderingEngine {
 
 		terrain.updateQuadtree();
 		terrain.render();
+		
+		ocean.render();
 
-		// draw into OpenGL window
 		window.render();
 	}
 

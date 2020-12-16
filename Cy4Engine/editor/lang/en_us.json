@@ -1,0 +1,12 @@
+{
+	"window.title": "Cy4Engine",
+	"window.editor": "Editor",
+	
+	"menubar.file": "File",
+	"menubar.newProject": "New Project",
+	"menubar.openProject": "Open Project",
+	"menubar.saveProject": "Save Project",
+	"menubar.quit": "Quit",
+	"menubar.editor": "Editor",
+	"menubar.runProject": "Run"
+}

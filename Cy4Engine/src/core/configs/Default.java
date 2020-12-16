@@ -16,7 +16,7 @@ import static org.lwjgl.opengl.GL11.glFrontFace;
 import static org.lwjgl.opengl.GL30.GL_FRAMEBUFFER_SRGB;
 
 
-public class Default implements RenderConfig{
+public class Default implements RenderConfig {
 
 	public void enable() {
 		

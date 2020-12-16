@@ -25,7 +25,7 @@ public class Camera {
 	private Vec3f forward;
 	private Vec3f previousForward;
 	private Vec3f up;
-	private float movAmt = 1.1f;
+	private float movAmt = 0.1f;
 	private float rotAmt = 1.8f;
 	private Matrix4f viewMatrix;
 	private Matrix4f projectionMatrix;
@@ -48,6 +48,8 @@ public class Camera {
 	private float rotXcounter;
 	private boolean rotXInitiated = false;
 	private float mouseSensitivity = 0.8f;
+	
+	private boolean isUnderwater;
 
 	private Quaternion[] frustumPlanes = new Quaternion[6];
 	private Vec3f[] frustumCorners = new Vec3f[8];
@@ -340,4 +342,14 @@ public class Camera {
 	private void setPreviousForward(Vec3f previousForward) {
 		this.previousForward = previousForward;
 	}
+
+	public boolean isUnderwater() {
+		return isUnderwater;
+	}
+
+	public void setUnderwater(boolean isUnderwater) {
+		this.isUnderwater = isUnderwater;
+	}
+	
+	
 }
