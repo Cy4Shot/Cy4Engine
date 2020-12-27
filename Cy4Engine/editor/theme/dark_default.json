@@ -54,7 +54,14 @@
 		},
 		{
 			"name": "text",
-			"color": "#282a2e"
+			"color": "#c5c8c6"
 		}
-	]
+	],
+	"font": {
+		"name": "Hack",
+		"regular": "./editor/font/Hack-Regular.ttf",
+		"bold": "./editor/font/Hack-Bold.ttf",
+		"italic": "./editor/font/Hack-Italic.ttf",
+		"bolditalic": "./editor/font/Hack-BoldItalic.ttf"
+	}
 }

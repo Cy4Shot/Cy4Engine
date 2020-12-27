@@ -45,7 +45,7 @@ public class CoreEngine {
 
 		Window.getInstance().create(width, height, name, imagePath);
 
-		renderingEngine = new RenderingEngine();
+		renderingEngine = new RenderingEngine(true);
 
 		getDeviceProperties();
 	}

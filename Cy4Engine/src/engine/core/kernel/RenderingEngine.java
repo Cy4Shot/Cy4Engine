@@ -19,6 +19,8 @@ public class RenderingEngine {
 	private Skydome sky;
 	private Terrain terrain;
 	private Scenegraph sceneGraph;
+	
+	private static boolean isRuntime;
 
 	public Scenegraph getSceneGraph() {
 		return sceneGraph;
@@ -28,7 +30,8 @@ public class RenderingEngine {
 		this.sceneGraph = sceneGraph;
 	}
 
-	public RenderingEngine() {
+	public RenderingEngine(boolean isRuntime) {
+		RenderingEngine.isRuntime = isRuntime;
 		window = Window.getInstance();
 		sceneGraph = new Scenegraph();
 		sky = new Skydome();
@@ -52,8 +55,9 @@ public class RenderingEngine {
 
 		terrain.updateQuadtree();
 		terrain.render();
-
-		window.render();
+		
+		if(RenderingEngine.isRuntime)
+			window.render();
 	}
 
 	public void update() {
@@ -66,5 +70,9 @@ public class RenderingEngine {
 	}
 
 	public void shutdown() {
+	}
+
+	public static boolean isRuntime() {
+		return isRuntime;
 	}
 }

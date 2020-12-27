@@ -6,18 +6,20 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
+import editor.Editor;
 
 public class LangConfig {
 
 	private Map<String, String> languageTranslator;
 
-	public LangConfig() {
+	public LangConfig(String file) {
 		languageTranslator = new HashMap<String, String>();
-	}
-
-	public void loadFile(String file) {
+		
 		InputStream is;
 		try {
 			is = new FileInputStream(file);
@@ -27,10 +29,11 @@ public class LangConfig {
 				languageTranslator.put(key, obj.getString(key));
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, Editor.getLanguage().get("dialog.langNotFound"),
+					Editor.getLanguage().get("error.langLoadingError"), JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
 		}
 	}
-
 	public Map<String, String> getLanguageTranslator() {
 		return languageTranslator;
 	}

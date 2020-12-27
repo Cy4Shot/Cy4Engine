@@ -6,7 +6,29 @@
 	"menubar.newProject": "New Project",
 	"menubar.openProject": "Open Project",
 	"menubar.saveProject": "Save Project",
+	"menubar.preferences": "Preferences",
 	"menubar.quit": "Quit",
-	"menubar.editor": "Editor",
-	"menubar.runProject": "Run"
+	"menubar.project": "Project",
+	"menubar.runProject": "Run",
+	"menubar.projectSettings": "Project Settings",
+	
+	"panel.project.defaultTitle": "Project Settings",
+	"panel.project.settings": "Settings",
+	
+	"panel.game.noProjectOpen": "No Project Open. Open a project in File>Open Project.",
+	"panel.game.selectEdit": "Select An Item To Edit On The Left",
+	
+	"dialog.enterProjectName": "Enter Project Name",
+	"dialog.selectProjectPath": "Select Project Path",
+	"dialog.projectAlreadyExists": "Project Already Exists",
+	"dialog.projectNoExists": "Project Does Not Exist",
+	"dialog.invalidProjectName": "Invalid Project Name",
+	"dialog.engineSaveFile": "Cy4Engine - Project",
+	"dialog.themeNotFound": "Theme File Could Not Be Found",
+	"dialog.langNotFound": "Language File Could Not Be Found",
+	
+	"error.newProjectError": "New Project Error",
+	"error.openProjectError": "Open Project Error",
+	"error.themeLoadingError": "Theme Loading Error",
+	"error.langLoadingError": "Language Loading Error"
 }

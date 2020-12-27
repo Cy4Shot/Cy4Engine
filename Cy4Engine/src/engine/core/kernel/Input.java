@@ -26,166 +26,156 @@ import engine.core.math.Vec2f;
 
 /**
  * 
- * @author oreon3D
- * The GLFW Input-Handler
+ * @author oreon3D The GLFW Input-Handler
  *
  */
 public class Input {
-	
+
 	private static Input instance = null;
 
 	private ArrayList<Integer> pushedKeys = new ArrayList<Integer>();
 	private ArrayList<Integer> keysHolding = new ArrayList<Integer>();
 	private ArrayList<Integer> releasedKeys = new ArrayList<Integer>();
-	
+
 	private ArrayList<Integer> pushedButtons = new ArrayList<Integer>();
 	private ArrayList<Integer> buttonsHolding = new ArrayList<Integer>();
 	private ArrayList<Integer> releasedButtons = new ArrayList<Integer>();
-	
+
 	private Vec2f cursorPosition;
 	private Vec2f lockedCursorPosition;
 	private float scrollOffset;
-	
+
 	private boolean pause = false;
-	
+
 	@SuppressWarnings("unused")
 	private GLFWKeyCallback keyCallback;
-	 
+
 	@SuppressWarnings("unused")
 	private GLFWCursorPosCallback cursorPosCallback;
-	
+
 	@SuppressWarnings("unused")
 	private GLFWMouseButtonCallback mouseButtonCallback;
-	
+
 	@SuppressWarnings("unused")
 	private GLFWScrollCallback scrollCallback;
-	
+
 	@SuppressWarnings("unused")
 	private GLFWFramebufferSizeCallback framebufferSizeCallback;
-	
-	public static Input getInstance() 
-	{
-	    if(instance == null) 
-	    {
-	    	instance = new Input();
-	    }
-	      return instance;
+
+	public static Input getInstance() {
+		if (instance == null) {
+			instance = new Input();
+		}
+		return instance;
 	}
-	
-	protected Input()
-	{
+
+	protected Input() {
 		cursorPosition = new Vec2f();
-		
-		glfwSetFramebufferSizeCallback(Window.getInstance().getWindow(), (framebufferSizeCallback = new GLFWFramebufferSizeCallback() {
-		    @Override
-		    public void invoke(long window, int width, int height) {
-		        Window.getInstance().setWindowSize(width, height);
-		    }
-		}));
-		
-		glfwSetKeyCallback(Window.getInstance().getWindow(), (keyCallback = new GLFWKeyCallback() {
 
-            @SuppressWarnings("deprecation")
+		glfwSetFramebufferSizeCallback(getWindow(), (framebufferSizeCallback = new GLFWFramebufferSizeCallback() {
 			@Override
-            public void invoke(long window, int key, int scancode, int action, int mods) {
-            	if (action == GLFW_PRESS){
-            		if (!pushedKeys.contains(key)){
-            			pushedKeys.add(key);
-            			keysHolding.add(key);
-            		}
-                }
-            	
-                if (action == GLFW_RELEASE){
-                	keysHolding.remove(new Integer(key));
-                	releasedKeys.add(key);
-                }
-            }
-        }));
-		
-		glfwSetMouseButtonCallback(Window.getInstance().getWindow(), (mouseButtonCallback = new GLFWMouseButtonCallback() {
+			public void invoke(long window, int width, int height) {
+				Window.getInstance().setWindowSize(width, height);
+			}
+		}));
 
-            @SuppressWarnings("deprecation")
+		glfwSetKeyCallback(getWindow(), (keyCallback = new GLFWKeyCallback() {
+
+			@SuppressWarnings("deprecation")
 			@Override
-            public void invoke(long window, int button, int action, int mods) {
-                if(button == 2 && action == GLFW_PRESS) {
-                	lockedCursorPosition = new Vec2f(cursorPosition);
-                	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-                }
+			public void invoke(long window, int key, int scancode, int action, int mods) {
+				if (action == GLFW_PRESS) {
+					if (!pushedKeys.contains(key)) {
+						pushedKeys.add(key);
+						keysHolding.add(key);
+					}
+				}
 
-                if(button == 2 && action == GLFW_RELEASE) {
-                	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-                }
-                
-                if (action == GLFW_PRESS){
-                	if (!pushedButtons.contains(button)){
-                		pushedButtons.add(button);
-                		buttonsHolding.add(button);
-                	}
-                }
-                
-                if (action == GLFW_RELEASE){
-                	releasedButtons.add(button);
-                	buttonsHolding.remove(new Integer(button));
-                }
-            }
+				if (action == GLFW_RELEASE) {
+					keysHolding.remove(new Integer(key));
+					releasedKeys.add(key);
+				}
+			}
 		}));
-		
-		glfwSetCursorPosCallback(Window.getInstance().getWindow(), (cursorPosCallback = new GLFWCursorPosCallback() {
 
-            @Override
-            public void invoke(long window, double xpos, double ypos) {
-            	cursorPosition.setX((float) xpos);
-            	cursorPosition.setY((float) ypos);
-            }
+		glfwSetMouseButtonCallback(getWindow(), (mouseButtonCallback = new GLFWMouseButtonCallback() {
+
+			@SuppressWarnings("deprecation")
+			@Override
+			public void invoke(long window, int button, int action, int mods) {
+				if (button == 2 && action == GLFW_PRESS) {
+					lockedCursorPosition = new Vec2f(cursorPosition);
+					glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+				}
+
+				if (button == 2 && action == GLFW_RELEASE) {
+					glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+				}
+
+				if (action == GLFW_PRESS) {
+					if (!pushedButtons.contains(button)) {
+						pushedButtons.add(button);
+						buttonsHolding.add(button);
+					}
+				}
+
+				if (action == GLFW_RELEASE) {
+					releasedButtons.add(button);
+					buttonsHolding.remove(new Integer(button));
+				}
+			}
+		}));
+
+		glfwSetCursorPosCallback(getWindow(), (cursorPosCallback = new GLFWCursorPosCallback() {
+
+			@Override
+			public void invoke(long window, double xpos, double ypos) {
+				cursorPosition.setX((float) xpos);
+				cursorPosition.setY((float) ypos);
+			}
 
 		}));
-		
-		glfwSetScrollCallback(Window.getInstance().getWindow(), (scrollCallback = new GLFWScrollCallback() {
-			
+
+		glfwSetScrollCallback(getWindow(), (scrollCallback = new GLFWScrollCallback() {
+
 			@Override
 			public void invoke(long window, double xoffset, double yoffset) {
 				setScrollOffset((float) yoffset);
 			}
 		}));
 	}
-	
+
 	public void update() {
 		setScrollOffset(0);
 		pushedKeys.clear();
 		releasedKeys.clear();
 		pushedButtons.clear();
 		releasedButtons.clear();
-		
+
 		glfwPollEvents();
 	}
-	
-	public boolean isKeyPushed(int key)
-	{
+
+	public boolean isKeyPushed(int key) {
 		return pushedKeys.contains(key);
 	}
-	
-	public boolean isKeyReleased(int key)
-	{
+
+	public boolean isKeyReleased(int key) {
 		return releasedKeys.contains(key);
 	}
-	
-	public boolean isKeyHold(int key)
-	{
+
+	public boolean isKeyHold(int key) {
 		return keysHolding.contains(key);
 	}
-	
-	public boolean isButtonPushed(int key)
-	{
+
+	public boolean isButtonPushed(int key) {
 		return pushedButtons.contains(key);
 	}
-	
-	public boolean isButtonreleased(int key)
-	{
+
+	public boolean isButtonreleased(int key) {
 		return releasedButtons.contains(key);
 	}
-	
-	public boolean isButtonHolding(int key)
-	{
+
+	public boolean isButtonHolding(int key) {
 		return buttonsHolding.contains(key);
 	}
 
@@ -196,17 +186,15 @@ public class Input {
 	public void setPause(boolean pause) {
 		this.pause = pause;
 	}
-	
+
 	public Vec2f getCursorPosition() {
 		return cursorPosition;
 	}
 
 	public void setCursorPosition(Vec2f cursorPosition) {
 		this.cursorPosition = cursorPosition;
-		
-		glfwSetCursorPos(Window.getInstance().getWindow(),
-				cursorPosition.getX(),
-				cursorPosition.getY());
+
+		glfwSetCursorPos(getWindow(), cursorPosition.getX(), cursorPosition.getY());
 	}
 
 	public Vec2f getLockedCursorPosition() {
@@ -216,7 +204,7 @@ public class Input {
 	public void setLockedCursorPosition(Vec2f lockedCursorPosition) {
 		this.lockedCursorPosition = lockedCursorPosition;
 	}
-	
+
 	public ArrayList<Integer> getPushedKeys() {
 		return pushedKeys;
 	}
@@ -239,5 +227,9 @@ public class Input {
 
 	public ArrayList<Integer> getPushedButtons() {
 		return pushedButtons;
+	}
+
+	private long getWindow() {
+		return Window.getInstance().getWindow();
 	}
 }
