@@ -1,6 +1,7 @@
 {
 	"window.title": "Cy4Engine",
 	"window.editor": "Editor",
+	"window.projectSettings": "Project Settings",
 	
 	"menubar.file": "File",
 	"menubar.newProject": "New Project",
@@ -13,10 +14,13 @@
 	"menubar.projectSettings": "Project Settings",
 	
 	"panel.project.defaultTitle": "Project Settings",
-	"panel.project.settings": "Settings",
+	"panel.project.hierarchy": "Hierarchy",
 	
 	"panel.game.noProjectOpen": "No Project Open. Open a project in File>Open Project.",
 	"panel.game.selectEdit": "Select An Item To Edit On The Left",
+	
+	"settings.info": "Information",
+	"settings.info.projectDisplayName": "Project Name",
 	
 	"dialog.enterProjectName": "Enter Project Name",
 	"dialog.selectProjectPath": "Select Project Path",
@@ -26,9 +30,11 @@
 	"dialog.engineSaveFile": "Cy4Engine - Project",
 	"dialog.themeNotFound": "Theme File Could Not Be Found",
 	"dialog.langNotFound": "Language File Could Not Be Found",
+	"dialog.noProjectOpen": "No Project Open. Please open a project with File > Open Project, or create a project with File > New Project.",
 	
 	"error.newProjectError": "New Project Error",
 	"error.openProjectError": "Open Project Error",
 	"error.themeLoadingError": "Theme Loading Error",
-	"error.langLoadingError": "Language Loading Error"
+	"error.langLoadingError": "Language Loading Error",
+	"error.projectError": "Project Error"
 }

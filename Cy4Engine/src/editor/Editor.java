@@ -26,7 +26,7 @@ import editor.listener.menubar.QuitListener;
 import editor.listener.menubar.RunProjectListener;
 import editor.listener.menubar.SaveProjectListener;
 import editor.panel.GamePanel;
-import editor.panel.ProjectPanel;
+import editor.panel.HierarchyPanel;
 
 @SuppressWarnings("serial")
 public class Editor extends JFrame {
@@ -47,7 +47,7 @@ public class Editor extends JFrame {
 
 	GamePanel gamepanel;
 	JPanel consolepanel;
-	ProjectPanel projectpanel;
+	HierarchyPanel hierarchypanel;
 
 	public static void main(String[] args) {
 
@@ -94,13 +94,13 @@ public class Editor extends JFrame {
 		// Create Splitplanes
 		gamepanel = new GamePanel(new GridLayout(1, 1));
 		consolepanel = new JPanel();
-		projectpanel = new ProjectPanel();
+		hierarchypanel = new HierarchyPanel();
 		JSplitPane editorPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gamepanel, consolepanel);
 		editorPane.setResizeWeight(0.9);
-		JSplitPane mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, projectpanel, editorPane);
+		JSplitPane mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, hierarchypanel, editorPane);
 		mainPane.setResizeWeight(0.07);
 
-		projectpanel.init();
+		hierarchypanel.init();
 		gamepanel.init();
 
 		// Set Window Properties
@@ -108,7 +108,7 @@ public class Editor extends JFrame {
 		setContentPane(mainPane);
 		setJMenuBar(mb);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1920, 1080);
+		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		setVisible(true);
 	}
 
@@ -119,7 +119,7 @@ public class Editor extends JFrame {
 			setTitle(language.get("window.title") + " - " + language.get("window.editor") + " | "
 					+ projectDataJSON.getString("projectName"));
 		gamepanel.update();
-		projectpanel.update();
+		hierarchypanel.update();
 	}
 
 	private JSONObject readProjectJSON() {
@@ -166,6 +166,10 @@ public class Editor extends JFrame {
 
 	public JSONObject getProjectDataJSON() {
 		return projectDataJSON;
+	}
+	
+	public boolean isProjectOpen() {
+		return !projectDataJSON.isEmpty();
 	}
 
 	public void setProjectDataJSON(JSONObject projectDataJSON) {
